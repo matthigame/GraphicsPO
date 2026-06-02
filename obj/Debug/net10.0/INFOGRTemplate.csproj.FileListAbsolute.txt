@@ -34,3 +34,4 @@ C:\Users\matth\source\repos\GraphPO\obj\Debug\net10.0\refint\INFOGRTemplate.dll
 C:\Users\matth\source\repos\GraphPO\obj\Debug\net10.0\INFOGRTemplate.pdb
 C:\Users\matth\source\repos\GraphPO\obj\Debug\net10.0\INFOGRTemplate.genruntimeconfig.cache
 C:\Users\matth\source\repos\GraphPO\obj\Debug\net10.0\ref\INFOGRTemplate.dll
+C:\Users\matth\source\repos\GraphPO\obj\Debug\net10.0\INFOGRTemplate.sourcelink.json

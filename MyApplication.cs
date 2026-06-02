@@ -39,6 +39,7 @@ namespace Template
                     screen.Plot(column, row, new Color3(0.5f, 0.5f, 0.5f));
                 }
             }
+            
 
             deltaTime += timer.Elapsed;
             frames++;
