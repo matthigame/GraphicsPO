@@ -1,3 +1,4 @@
+using INFOGRTemplate;
 using OpenTK.Mathematics;
 using System.Diagnostics;
 using System.Globalization;
@@ -9,6 +10,7 @@ namespace Template
         // member variables
         public Surface screen;
         private readonly Stopwatch timer = new();
+        public Raytracer raytracer;
         // constructor
         public MyApplication(Surface screen)
         {
@@ -18,6 +20,7 @@ namespace Template
         // initialize
         public void Init()
         {
+            raytracer = new Raytracer(screen);
             // (optional) example of how you can load a triangle mesh in any file format supported by Assimp
             object? mesh = Util.ImportMesh("../../../assets/cube.obj");
         }
@@ -39,7 +42,8 @@ namespace Template
                     screen.Plot(column, row, new Color3(0.5f, 0.5f, 0.5f));
                 }
             }
-            
+
+            raytracer.Render(); //render every tick
 
             deltaTime += timer.Elapsed;
             frames++;
