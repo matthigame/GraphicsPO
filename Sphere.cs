@@ -41,10 +41,5 @@ namespace INFOGRTemplate
             }
         }
 
-        public Intersection Intersect(Ray ray)
-        {
-            return new Intersection(this, ray);
-        }
-
     }
 }

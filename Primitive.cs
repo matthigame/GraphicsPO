@@ -18,5 +18,11 @@ namespace INFOGRTemplate
             this.position = _position;
             this.typeID = _typeID;
         }
+
+        public Intersection Intersect(Ray ray)
+        {
+            return new Intersection(this, ray);
+        }
+
     }
 }
