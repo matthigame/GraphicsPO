@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 using System.Text;
+using Template;
 
 namespace INFOGRTemplate
 {
@@ -14,13 +15,14 @@ namespace INFOGRTemplate
         public float fov = 1;
         float aspectRatio = 1;
 
-        public Camera(Vector3 position, Vector3 lookAtDirection, Vector3 upDirection)
+        public Camera(Vector3 position, Vector3 lookAtDirection, Vector3 upDirection, Surface screen)
         {
             this.position = position;
-            this.lookAtDirection = lookAtDirection;
-            this.upDirection = upDirection;
-            rightDirection = Vector3.Cross(lookAtDirection, upDirection);
+            this.lookAtDirection = Vector3.Normalize(lookAtDirection);
+            this.upDirection = Vector3.Normalize(upDirection);
+            rightDirection = Vector3.Normalize(Vector3.Cross(upDirection, lookAtDirection));
             Vector3 screenCenter = position + (fov * lookAtDirection);
+            aspectRatio = (float)screen.width / screen.height;
 
             screenCorners[0] = screenCenter + upDirection - (aspectRatio * rightDirection);
             screenCorners[1] = screenCenter + upDirection + (aspectRatio * rightDirection);

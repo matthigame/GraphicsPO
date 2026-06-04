@@ -9,5 +9,6 @@ namespace INFOGRTemplate
     {
         Vector3 normalVector;
         float distance;
+
     }
 }

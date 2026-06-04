@@ -59,7 +59,7 @@ namespace INFOGRTemplate
                 intersectCount = 1;
                 scalar = (-b) / (2 * a); //quadratic equation without the discriminant, since it is 0
                 float x = ray.startPosition.X + ray.direction.X * scalar;
-                float y = ray.startPosition.Y + ray.direction.Z * scalar;
+                float y = ray.startPosition.Y + ray.direction.Y * scalar;
                 float z = ray.startPosition.Z + ray.direction.Z * scalar;
                 intersectionPoints[0] = new Vector3(x, y, z);
                 intersects = true;
@@ -70,13 +70,13 @@ namespace INFOGRTemplate
                 intersectCount = 2;
                 scalar = ((-b) + (float)MathF.Sqrt(discriminant)) / (2 * a); //standard quadratic equation
                 float x = ray.startPosition.X + ray.direction.X * scalar;
-                float y = ray.startPosition.Y + ray.direction.Z * scalar;
+                float y = ray.startPosition.Y + ray.direction.Y * scalar;
                 float z = ray.startPosition.Z + ray.direction.Z * scalar;
                 intersectionPoints[0] = new Vector3(x, y, z); //first intersection point
 
                 scalar = ((-b) - (float)MathF.Sqrt(discriminant)) / (2 * a);
                 float x2 = ray.startPosition.X + ray.direction.X * scalar;
-                float y2 = ray.startPosition.Y + ray.direction.Z * scalar;
+                float y2 = ray.startPosition.Y + ray.direction.Y * scalar;
                 float z2 = ray.startPosition.Z + ray.direction.Z * scalar;
                 intersectionPoints[1] = new Vector3(x2, y2, z2); //second intersection point
                 intersects = true;

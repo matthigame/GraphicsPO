@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Security.Principal;
 using System.Net.Quic;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using System.Reflection.Metadata.Ecma335;
 
 
 namespace INFOGRTemplate
@@ -46,7 +47,7 @@ namespace INFOGRTemplate
 
         private void SetupCamera()
         {
-            camera = new Camera(new Vector3(0, 0, 0), new Vector3(0, 0, 1), new Vector3(0, 1, 0));
+            camera = new Camera(new Vector3(0, 0, 0), new Vector3(0, 0, 1), new Vector3(0, 1, 0), screen);
         }
 
         public void Render()
@@ -57,24 +58,26 @@ namespace INFOGRTemplate
             {
                 for (int pixelY = 0; pixelY < screen.height; pixelY++)
                 {
-                    PrimaryRay ray = new PrimaryRay(camera.position, (camera.screenCorners[0] + ((pixelX + 0.5f) / screen.width * camera.rightDirection) + ((pixelY + 0.5f) / screen.height * camera.upDirection)) - camera.position);
+                    Vector3 direction = (camera.screenCorners[0] + ((pixelX + 0.5f) / screen.width * (camera.screenCorners[1] - camera.screenCorners[0])) + ((pixelY + 0.5f) / screen.height * (camera.screenCorners[2] - camera.screenCorners[0]))) - camera.position;
+                    direction = Vector3.Normalize(direction);
+                    PrimaryRay ray = new PrimaryRay(camera.position, direction);
 
 
                     //This is the ray for the debug
-                    n++;
-                    if (pixelY % 15 == 0 && pixelX % 15 == 0)
-                    {
-                        Vector2 startPosition = new Vector2(ray.startPosition.X, -ray.startPosition.Z) + debugOrigin;
-                        screen.Line((int)startPosition.X, (int)startPosition.Y, (int)startPosition.X + (int)(ray.direction.X * 750), (int)startPosition.Y + (int)(-ray.direction.Z * 750), new Color3(0, 0, 0));
-                    }
+                    //n++;
+                    //if (pixelY % 15 == 0 && pixelX % 15 == 0)
+                    //{
+                    //    Vector2 startPosition = new Vector2(ray.startPosition.X, -ray.startPosition.Z) + debugOrigin;
+                    //    screen.Line((int)startPosition.X, (int)startPosition.Y, (int)startPosition.X + (int)(ray.direction.X * 750), (int)startPosition.Y + (int)(-ray.direction.Z * 750), new Color3(0, 0, 0));
+                    //}
 
                     //This is the actual ray
-                    //Color3 color = ShootRayThroughPixel(ray);
-                    //if (color != -1)
-                    //    screen.Plot(pixelX, pixelY, color);
+                    Color3 color = ShootRayThroughPixel(ray);
+                    if (color != -1)
+                        screen.Plot(pixelX, pixelY, color);
                 }
             }
-            DrawDebug(); //should be commented for now if not desired
+            //DrawDebug(); //should be commented for now if not desired
         }
 
         private Color3 ShootRayThroughPixel(PrimaryRay ray)
@@ -85,6 +88,8 @@ namespace INFOGRTemplate
                 Intersection intersection = primitive.Intersect(ray);
                 if (finalIntersect == null && intersection.intersects)
                     finalIntersect = intersection;
+                else if (finalIntersect == null)
+                    continue;
                 else if (intersection.intersects && ClosestIntersect(finalIntersect, intersection))
                     finalIntersect = intersection;
             }
