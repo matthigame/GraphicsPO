@@ -5,6 +5,8 @@ using System.Numerics;
 using Template;
 using System.Diagnostics;
 using System.Security.Principal;
+using System.Net.Quic;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 
 namespace INFOGRTemplate
@@ -14,6 +16,7 @@ namespace INFOGRTemplate
         public Surface screen;
         public Scene scene;
         public Camera camera;
+        KeyboardState keyboardState;
         public Raytracer(Surface _screen)
         {
             screen = _screen;
@@ -25,9 +28,9 @@ namespace INFOGRTemplate
         { 
             //add all the objects in the scene
             List<Primitive> sceneElements = new List<Primitive>();
-            Sphere sphereElement1 = new Sphere(new Vector3(300, 50, 0), 40, new Color3(1, 0, 0));
-            Sphere sphereElement2 = new Sphere(new Vector3(150, 50, 0), 40, new Color3(0, 1, 0));
-            Sphere sphereElement3 = new Sphere(new Vector3(450, 50, 0), 40, new Color3(0, 0, 1));
+            Sphere sphereElement1 = new Sphere(new Vector3(1, 0, 5), 2, new Color3(1, 0, 0));
+            Sphere sphereElement2 = new Sphere(new Vector3(-5, 0, 4), 3, new Color3(0, 1, 0));
+            Sphere sphereElement3 = new Sphere(new Vector3(4, 0, 8), 2, new Color3(0, 0, 1));
             sceneElements.Add(sphereElement1);
             sceneElements.Add(sphereElement2);
             sceneElements.Add(sphereElement3);
@@ -43,42 +46,39 @@ namespace INFOGRTemplate
 
         private void SetupCamera()
         {
-            camera = new Camera(new Vector3(screen.width / 2, 300, 0), new Vector3(0, -1, 0), new Vector3(10, 0, 0));
+            camera = new Camera(new Vector3(0, 0, 0), new Vector3(0, 0, 1), new Vector3(0, 1, 0));
         }
 
         public void Render()
         {
+            Vector2 debugOrigin = new Vector2(screen.width / 2, 300);
             int n = 0;
             for (int pixelX = 0; pixelX < screen.width; pixelX++) //for every pixel horizontally
             {
                 for (int pixelY = 0; pixelY < screen.height; pixelY++)
                 {
+                    PrimaryRay ray = new PrimaryRay(camera.position, (camera.screenCorners[0] + ((pixelX + 0.5f) / screen.width * camera.rightDirection) + ((pixelY + 0.5f) / screen.height * camera.upDirection)) - camera.position);
+
+
+                    //This is the ray for the debug
                     n++;
-                    if (n > 4 && pixelY == screen.height / 2)
+                    if (pixelY % 15 == 0 && pixelX % 15 == 0)
                     {
-                        Vector3 pixelPos = new Vector3(pixelX, pixelY, camera.screenCorners[0].Z);
-                        Ray ray = new Ray(camera.position, IntToPos(pixelPos) - camera.position);
-                        screen.Line((int)ray.startPosition.X, (int)ray.startPosition.Y, (int)ray.startPosition.X + ((int)ray.direction.X * 500), (int)ray.startPosition.Y + ((int)ray.direction.Y * 500), new Color3(0, 0, 0));
-                        n = 0;
+                        Vector2 startPosition = new Vector2(ray.startPosition.X, -ray.startPosition.Z) + debugOrigin;
+                        screen.Line((int)startPosition.X, (int)startPosition.Y, (int)startPosition.X + (int)(ray.direction.X * 750), (int)startPosition.Y + (int)(-ray.direction.Z * 750), new Color3(0, 0, 0));
                     }
-                    //Color3 color = ShootRayThroughPixel(new Vector3(pixelX, pixelY, camera.screenCorners[0].Z));
+
+                    //This is the actual ray
+                    //Color3 color = ShootRayThroughPixel(ray);
                     //if (color != -1)
                     //    screen.Plot(pixelX, pixelY, color);
                 }
             }
-            DrawDebug(); //should be commented for now if not desired
+            //DrawDebug(); //should be commented for now if not desired
         }
 
-        private Vector3 IntToPos(Vector3 pixelPos)
+        private Color3 ShootRayThroughPixel(PrimaryRay ray)
         {
-            float a = (pixelPos.X + 0.5f) / screen.width;
-            float b = (pixelPos.Y + 0.5f) / screen.height;
-            return new Vector3(a, b, pixelPos.Z);
-        }
-
-        private Color3 ShootRayThroughPixel(Vector3 pixelPos)
-        {
-            Ray ray = new Ray(camera.position, pixelPos - camera.position);
             Intersection finalIntersect = null;
             foreach(Primitive primitive in scene.primitives)
             {
@@ -104,6 +104,8 @@ namespace INFOGRTemplate
         //method for drawing the debug
         private void DrawDebug()
         {
+            Vector2 debugOrigin = new Vector2(screen.width / 2, 300);
+            int scalar = 30;
             foreach (Primitive primitive in scene.primitives) //draw each primitive in the scene
             {
                 if (primitive is Sphere) //draw every sphere as a circle
@@ -113,17 +115,18 @@ namespace INFOGRTemplate
                     {
                         float x_offset = sphereToDraw.radius * (float)Math.Cos(angle*(Math.PI/180));
                         float y_offset = sphereToDraw.radius * (float)Math.Sin(angle * (Math.PI / 180));
-                        Vector3 vectortodraw = sphereToDraw.position + new Vector3(x_offset, y_offset, 0);
+                        Vector2 vectortodraw = debugOrigin + scalar * (new Vector2(sphereToDraw.position.X, -sphereToDraw.position.Z)+ new Vector2(x_offset, y_offset));
                         screen.Plot((int)vectortodraw.X, (int)vectortodraw.Y, primitive.color); //draw the desired pixel
                     }
                 }
             }
             //debug camera
-            screen.Box((int)camera.position.X, (int)camera.position.Y, (int)camera.position.X + 2, (int)camera.position.Y + 2, new Color3(1, 1, 0));
-            //debug screen
-            screen.Box((int)camera.screenCorners[0].X, (int)camera.screenCorners[0].Y, (int)camera.screenCorners[3].X + 2, (int)camera.screenCorners[3].Y + 2, new Color3(1, 1, 1));
+            screen.Box((int)camera.position.X + (int)debugOrigin.X, (int)camera.position.Y + (int)debugOrigin.Y, (int)camera.position.X + 2 + (int)debugOrigin.X, (int)camera.position.Y + 2 + (int)debugOrigin.Y, new Color3(1, 1, 0));
+            //debug screenc
+            screen.Line((int)(scalar * (camera.position.X + camera.screenCorners[0].X) + debugOrigin.X), (int)(scalar * (-camera.position.Z - camera.fov) + debugOrigin.Y), (int)(scalar  * (camera.position.X + camera.screenCorners[1].X) + debugOrigin.X), (int)(scalar * (-camera.position.Z - camera.fov) + debugOrigin.Y), new Color3(1, 1, 1));
             
         }
+
 
         private Vector3 DebugPos(Vector3 pos) 
         {

@@ -2,6 +2,7 @@
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Numerics;
 using System.Text;
@@ -38,7 +39,7 @@ namespace INFOGRTemplate
         { 
             //quadratic equation to figure out the scalar
             float a = (ray.direction.X* ray.direction.X) + (ray.direction.Y* ray.direction.Y) + (ray.direction.Z* ray.direction.Z);
-            float b = 2 * (ray.direction.X * (ray.startPosition.X - sphere.position.X) +
+            float b = 2 * (ray.direction.X * (ray.startPosition.X - sphere.position.X) +    
                            ray.direction.Y * (ray.startPosition.Y - sphere.position.Y)+
                            ray.direction.Z * (ray.startPosition.Z - sphere.position.Z));
             float c = (ray.startPosition.X - sphere.position.X) * (ray.startPosition.X - sphere.position.X) +
@@ -89,6 +90,12 @@ namespace INFOGRTemplate
                 else
                     closestIntersect = intersectionPoints[1];
             }
+        }
+
+        private void AnotherSphereIntersect(Sphere sphere, Ray ray)
+        {
+
+
         }
 
         private void PlaneIntersect(Primitive _primitive, Ray _ray) 
