@@ -74,7 +74,7 @@ namespace INFOGRTemplate
                     //    screen.Plot(pixelX, pixelY, color);
                 }
             }
-            //DrawDebug(); //should be commented for now if not desired
+            DrawDebug(); //should be commented for now if not desired
         }
 
         private Color3 ShootRayThroughPixel(PrimaryRay ray)
