@@ -21,9 +21,14 @@ namespace INFOGRTemplate
             this.lookAtDirection = Vector3.Normalize(lookAtDirection);
             this.upDirection = Vector3.Normalize(upDirection);
             rightDirection = Vector3.Normalize(Vector3.Cross(upDirection, lookAtDirection));
-            Vector3 screenCenter = position + (fov * lookAtDirection);
             aspectRatio = (float)screen.width / screen.height;
+            UpdateCamera();
+            
+        }
 
+        public void UpdateCamera()
+        {
+            Vector3 screenCenter = position + (fov * lookAtDirection);
             screenCorners[0] = screenCenter + upDirection - (aspectRatio * rightDirection);
             screenCorners[1] = screenCenter + upDirection + (aspectRatio * rightDirection);
             screenCorners[2] = screenCenter - upDirection - (aspectRatio * rightDirection);

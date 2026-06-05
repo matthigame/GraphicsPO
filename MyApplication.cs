@@ -1,5 +1,6 @@
 using INFOGRTemplate;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System.Diagnostics;
 using System.Globalization;
 
@@ -11,6 +12,8 @@ namespace Template
         public Surface screen;
         private readonly Stopwatch timer = new();
         public Raytracer raytracer;
+        public KeyboardState KeyBoardState { get; set; }
+        public MouseState MouseState { get; set; }
         // constructor
         public MyApplication(Surface screen)
         {
@@ -33,6 +36,9 @@ namespace Template
             timer.Restart();
 
             screen.Clear(0);
+
+            raytracer.KeyBoardState = KeyBoardState;
+            raytracer.MouseState = MouseState;
 
             for (int row = 0; row < screen.height; row++)
             {

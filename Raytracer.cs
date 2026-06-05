@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Security.Principal;
 using System.Net.Quic;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using OpenTK.Windowing.Desktop;
 using System.Reflection.Metadata.Ecma335;
 
 
@@ -17,7 +18,9 @@ namespace INFOGRTemplate
         public Surface screen;
         public Scene scene;
         public Camera camera;
-        KeyboardState keyboardState;
+        public KeyboardState KeyBoardState {  get; set; }
+        public MouseState MouseState { get; set; }
+        
         public Raytracer(Surface _screen)
         {
             screen = _screen;
@@ -52,7 +55,7 @@ namespace INFOGRTemplate
 
         public void Render()
         {
-            Vector2 debugOrigin = new Vector2(screen.width / 2, 300);
+            Vector2 debugOrigin = new Vector2(screen.width / 2 - camera.position.X, 300 + camera.position.Z);
             int n = 0;
             for (int pixelX = 0; pixelX < screen.width; pixelX++) //for every pixel horizontally
             {
@@ -63,21 +66,48 @@ namespace INFOGRTemplate
                     PrimaryRay ray = new PrimaryRay(camera.position, direction);
 
 
-                    //This is the ray for the debug
-                    //n++;
-                    //if (pixelY % 15 == 0 && pixelX % 15 == 0)
-                    //{
-                    //    Vector2 startPosition = new Vector2(ray.startPosition.X, -ray.startPosition.Z) + debugOrigin;
-                    //    screen.Line((int)startPosition.X, (int)startPosition.Y, (int)startPosition.X + (int)(ray.direction.X * 750), (int)startPosition.Y + (int)(-ray.direction.Z * 750), new Color3(0, 0, 0));
-                    //}
 
-                    //This is the actual ray
-                    Color3 color = ShootRayThroughPixel(ray);
-                    if (color != -1)
-                        screen.Plot(pixelX, pixelY, color);
+                    //This is the ray for the debug
+                    if (KeyBoardState.IsKeyDown(Keys.K))
+                    {
+                        n++;
+                        if (pixelY % 15 == 0 && pixelX % 15 == 0)
+                        {
+                            Vector2 startPosition = new Vector2(ray.startPosition.X, -ray.startPosition.Z) + debugOrigin;
+                            screen.Line((int)startPosition.X, (int)startPosition.Y, (int)startPosition.X + (int)(ray.direction.X * 750), (int)startPosition.Y + (int)(-ray.direction.Z * 750), new Color3(0, 0, 0));
+                        }
+                    }
+                    else
+                    {
+                        //This is the actual ray
+                        Color3 color = ShootRayThroughPixel(ray);
+                        if (color != -1)
+                            screen.Plot(pixelX, pixelY, color);
+                    }
                 }
             }
-            //DrawDebug(); //should be commented for now if not desired
+            if (KeyBoardState.IsKeyDown(Keys.K))
+                DrawDebug(); //should be commented for now if not desired
+
+            //Camera movement
+            if (KeyBoardState.IsKeyDown(Keys.A))
+                camera.position -= 0.2f * camera.rightDirection;
+            if (KeyBoardState.IsKeyDown(Keys.D))
+                camera.position += 0.2f * camera.rightDirection;
+            if (KeyBoardState.IsKeyDown(Keys.W))
+                camera.position += 0.2f * camera.lookAtDirection;
+            if (KeyBoardState.IsKeyDown(Keys.S))
+                camera.position -= 0.2f * camera.lookAtDirection;
+
+            //scrollen om de fov te veranderen (in of uit te zoomen)
+            camera.fov += 0.1f * MouseState.ScrollDelta.Y;
+
+
+
+            camera.UpdateCamera();
+
+            
+
         }
 
         private Color3 ShootRayThroughPixel(PrimaryRay ray)
@@ -86,11 +116,11 @@ namespace INFOGRTemplate
             foreach(Primitive primitive in scene.primitives)
             {
                 Intersection intersection = primitive.Intersect(ray);
-                if (finalIntersect == null && intersection.intersects)
+                if (finalIntersect == null && intersection.Intersects)
                     finalIntersect = intersection;
                 else if (finalIntersect == null)
                     continue;
-                else if (intersection.intersects && ClosestIntersect(finalIntersect, intersection))
+                else if (intersection.Intersects && ClosestIntersect(finalIntersect, intersection))
                     finalIntersect = intersection;
             }
             if (finalIntersect != null) 
@@ -109,7 +139,8 @@ namespace INFOGRTemplate
         //method for drawing the debug
         private void DrawDebug()
         {
-            Vector2 debugOrigin = new Vector2(screen.width / 2, 300);
+            Vector2 debugOrigin = new Vector2(screen.width / 2 - camera.position.X, 300 + camera.position.Z);
+            Vector2 offset = new Vector2(-camera.position.X, camera.position.Z);
             int scalar = 30;
             foreach (Primitive primitive in scene.primitives) //draw each primitive in the scene
             {
@@ -120,15 +151,15 @@ namespace INFOGRTemplate
                     {
                         float x_offset = sphereToDraw.radius * (float)Math.Cos(angle*(Math.PI/180));
                         float y_offset = sphereToDraw.radius * (float)Math.Sin(angle * (Math.PI / 180));
-                        Vector2 vectortodraw = debugOrigin + scalar * (new Vector2(sphereToDraw.position.X, -sphereToDraw.position.Z)+ new Vector2(x_offset, y_offset));
+                        Vector2 vectortodraw = debugOrigin + scalar * (new Vector2(sphereToDraw.position.X, -sphereToDraw.position.Z)+ new Vector2(x_offset, y_offset) + offset);
                         screen.Plot((int)vectortodraw.X, (int)vectortodraw.Y, primitive.color); //draw the desired pixel
                     }
                 }
             }
             //debug camera
-            screen.Box((int)camera.position.X + (int)debugOrigin.X, (int)camera.position.Y + (int)debugOrigin.Y, (int)camera.position.X + 2 + (int)debugOrigin.X, (int)camera.position.Y + 2 + (int)debugOrigin.Y, new Color3(1, 1, 0));
+            screen.Box((int)camera.position.X + (int)debugOrigin.X, (int)-camera.position.Z + (int)debugOrigin.Y, (int)camera.position.X + 2 + (int)debugOrigin.X, (int)-camera.position.Z + 2 + (int)debugOrigin.Y, new Color3(1, 1, 0));
             //debug screenc
-            screen.Line((int)(scalar * (camera.position.X + camera.screenCorners[0].X) + debugOrigin.X), (int)(scalar * (-camera.position.Z - camera.fov) + debugOrigin.Y), (int)(scalar  * (camera.position.X + camera.screenCorners[1].X) + debugOrigin.X), (int)(scalar * (-camera.position.Z - camera.fov) + debugOrigin.Y), new Color3(1, 1, 1));
+            screen.Line((int)(scalar * (camera.screenCorners[0].X + offset.X) + debugOrigin.X - offset.X), (int)(scalar * (-camera.screenCorners[0].Z + offset.Y) + debugOrigin.Y - offset.Y), (int)(scalar  * (camera.screenCorners[1].X + offset.X) + debugOrigin.X - offset.X), (int)(scalar * (-camera.screenCorners[1].Z + offset.Y) + debugOrigin.Y - offset.Y), new Color3(1, 1, 1));
             
         }
 

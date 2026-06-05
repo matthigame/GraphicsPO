@@ -13,7 +13,7 @@ namespace INFOGRTemplate
     {
         public Vector3[] intersectionPoints;
         public int intersectCount;
-        public bool intersects;
+        public bool Intersects => intersectCount > 0;
         public Vector3 closestIntersect;
         public Primitive primitive;
         public float distance;
@@ -31,7 +31,7 @@ namespace INFOGRTemplate
                     PlaneIntersect(_primitive, _ray);
                     break;
             }
-            if (intersects)
+            if (Intersects)
                 distance = Vector3.Distance(closestIntersect, _ray.startPosition);
         }
 
@@ -51,35 +51,41 @@ namespace INFOGRTemplate
             float scalar = 1;
             if (discriminant < 0) //no intersection
             {
-                intersectCount = 0;
-                intersects = false;
+                NoIntersect();
             }
             else if (discriminant == 0) //one intersection
             {
                 intersectCount = 1;
                 scalar = (-b) / (2 * a); //quadratic equation without the discriminant, since it is 0
+                if (scalar < 0)
+                    NoIntersect();
+
                 float x = ray.startPosition.X + ray.direction.X * scalar;
                 float y = ray.startPosition.Y + ray.direction.Y * scalar;
                 float z = ray.startPosition.Z + ray.direction.Z * scalar;
                 intersectionPoints[0] = new Vector3(x, y, z);
-                intersects = true;
                 closestIntersect = intersectionPoints[0];
             }
             else //two intersections
             {
                 intersectCount = 2;
                 scalar = ((-b) + (float)MathF.Sqrt(discriminant)) / (2 * a); //standard quadratic equation
+                if (scalar < 0)
+                    NoIntersect();
+
                 float x = ray.startPosition.X + ray.direction.X * scalar;
                 float y = ray.startPosition.Y + ray.direction.Y * scalar;
                 float z = ray.startPosition.Z + ray.direction.Z * scalar;
                 intersectionPoints[0] = new Vector3(x, y, z); //first intersection point
 
                 scalar = ((-b) - (float)MathF.Sqrt(discriminant)) / (2 * a);
+                if (scalar < 0)
+                    NoIntersect();
+
                 float x2 = ray.startPosition.X + ray.direction.X * scalar;
                 float y2 = ray.startPosition.Y + ray.direction.Y * scalar;
                 float z2 = ray.startPosition.Z + ray.direction.Z * scalar;
                 intersectionPoints[1] = new Vector3(x2, y2, z2); //second intersection point
-                intersects = true;
 
                 //check which point is closest
                 float Distance1 = Vector3.Distance(intersectionPoints[0], ray.startPosition);
@@ -92,10 +98,9 @@ namespace INFOGRTemplate
             }
         }
 
-        private void AnotherSphereIntersect(Sphere sphere, Ray ray)
+        private void NoIntersect()
         {
-
-
+            intersectCount--;
         }
 
         private void PlaneIntersect(Primitive _primitive, Ray _ray) 
