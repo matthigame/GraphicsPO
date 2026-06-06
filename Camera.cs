@@ -40,7 +40,7 @@ namespace INFOGRTemplate
 
             rightDirection = Vector3.Normalize(Vector3.Cross(lookAtDirection, -Vector3.UnitY));
 
-            upDirection = Vector3.Normalize(Vector3.Cross(rightDirection, lookAtDirection));
+            upDirection = Vector3.Normalize(Vector3.Cross(lookAtDirection, rightDirection));
 
             Vector3 screenCenter = position + (fov * lookAtDirection);
             screenCorners[0] = screenCenter + upDirection - (aspectRatio * rightDirection);
