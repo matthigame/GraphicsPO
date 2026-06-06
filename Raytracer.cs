@@ -135,12 +135,17 @@ namespace INFOGRTemplate
                 camera.position += 0.2f * camera.lookAtDirection;
             if (KeyBoardState.IsKeyDown(Keys.S))
                 camera.position -= 0.2f * camera.lookAtDirection;
+            if (KeyBoardState.IsKeyDown(Keys.Space))
+                camera.position += 0.2f * Vector3.UnitY;
+            if (KeyBoardState.IsKeyDown(Keys.LeftShift))
+                camera.position -= 0.2f * Vector3.UnitY;
+
 
             //scrollen om de fov te veranderen (in of uit te zoomen)
             camera.fov += 0.1f * MouseState.ScrollDelta.Y;
 
-
-            camera.angleX += sensitivity * MouseState.Delta.Y;
+            //looking around with mouse
+            camera.angleX -= sensitivity * MouseState.Delta.Y;
             camera.angleY += sensitivity * MouseState.Delta.X;
 
             camera.UpdateCamera();
