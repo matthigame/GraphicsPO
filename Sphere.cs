@@ -11,10 +11,10 @@ namespace INFOGRTemplate
     {
         public float radius;
 
-        public Sphere(Vector3 position, float radius, Color3 color) : base(color, position, "Sphere")
+        public Sphere(Vector3 _position, float _radius, Color3 _color, Materials _material) : base(_color, _position, PrimitiveTypes.Sphere, _material)
         {
-            this.position = position;
-            this.radius = radius;
+            this.position = _position;
+            this.radius = _radius;
         }
 
         //calculates the intersection point closest the place the ray was fired from

@@ -175,6 +175,8 @@ namespace Template
             // called once per frame; app logic
             var keyboard = KeyboardState;
             if (keyboard[Keys.Escape]) terminated = true;
+            app.KeyBoardState = keyboard;
+            app.MouseState = MouseState;
         }
         protected override void OnRenderFrame(FrameEventArgs e)
         {

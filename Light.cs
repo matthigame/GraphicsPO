@@ -8,8 +8,8 @@ namespace INFOGRTemplate
 {
     internal class Light
     {
-        Vector3 location;
-        Color3 intensity;
+        public Vector3 location;
+        public Color3 intensity;
         public Light(Vector3 _location, Color3 _intensity)
         {
             this.location = _location;
