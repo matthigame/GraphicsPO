@@ -9,6 +9,7 @@ using System.Net.Quic;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.AccessControl;
 
 
 namespace INFOGRTemplate
@@ -18,6 +19,7 @@ namespace INFOGRTemplate
         public Surface screen;
         public Scene scene;
         public Camera camera;
+        public float sensitivity = 0.2f;
         public KeyboardState KeyBoardState {  get; set; }
         public MouseState MouseState { get; set; }
         
@@ -103,6 +105,8 @@ namespace INFOGRTemplate
             camera.fov += 0.1f * MouseState.ScrollDelta.Y;
 
 
+            camera.angleX += sensitivity * MouseState.Delta.Y;
+            camera.angleY += sensitivity * MouseState.Delta.X;
 
             camera.UpdateCamera();
 

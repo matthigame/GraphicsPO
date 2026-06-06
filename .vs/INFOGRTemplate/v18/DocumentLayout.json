@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:raytracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\intersection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:intersection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\intersection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:intersection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\template.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -66,9 +66,9 @@
               "Title": "Raytracer.cs",
               "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Raytracer.cs",
               "RelativeDocumentMoniker": "Raytracer.cs",
-              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Raytracer.cs*",
-              "RelativeToolTip": "Raytracer.cs*",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAlwGMAAABAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Raytracer.cs",
+              "RelativeToolTip": "Raytracer.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAwwG0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T07:45:03.225Z",
               "IsPinned": true,
@@ -76,13 +76,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Camera.cs",
               "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Camera.cs",
               "RelativeDocumentMoniker": "Camera.cs",
               "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Camera.cs",
               "RelativeToolTip": "Camera.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAQwCQAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T07:43:33.249Z",
               "IsPinned": true,
@@ -90,7 +90,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Intersection.cs",
               "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Intersection.cs",
               "RelativeDocumentMoniker": "Intersection.cs",
@@ -164,10 +164,9 @@
               "RelativeDocumentMoniker": "MyApplication.cs",
               "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\MyApplication.cs",
               "RelativeToolTip": "MyApplication.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAYwCgAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwCoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T06:35:38.428Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-02T06:35:38.428Z"
             },
             {
               "$type": "Document",
@@ -179,8 +178,7 @@
               "RelativeToolTip": "template.cs",
               "ViewState": "AgIAAJsAAAAAAAAAAAAgwLAAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T06:35:43.505Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-02T06:35:43.505Z"
             },
             {
               "$type": "Document",
