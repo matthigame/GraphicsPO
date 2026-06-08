@@ -46,8 +46,8 @@ namespace INFOGRTemplate
             Sphere sphereElement2 = new Sphere(new Vector3(-2, 0, 6), 1.5f, new Color3(0, 1, 0), Materials.Diffuse);
             Sphere sphereElement3 = new Sphere(new Vector3(2, 0, 6), 2, new Color3(0, 0, 1), Materials.Diffuse);
 
-            Plane basePlane = new Plane(new Vector3(0, 1, 0), 1f, new Color3(0f, 0.5f, 0f), Materials.Diffuse); //floor
-            Plane wallPlane = new Plane(new Vector3(0, 0, -1), 20f, new Color3(0.2f, 0.4f, 0.8f), Materials.Diffuse); //backboard
+            Plane basePlane = new Plane(new Vector3(0, 1, 0), 1f, new Color3(0f, 0f, 0f), Materials.Diffuse, true); //floor
+            Plane wallPlane = new Plane(new Vector3(0, 0, -1), 20f, new Color3(0.2f, 0.4f, 0.8f), Materials.Diffuse, true); //backboard
 
             sceneElements.Add(sphereElement1);
             sceneElements.Add(sphereElement2);
@@ -135,12 +135,17 @@ namespace INFOGRTemplate
                 camera.position += 0.2f * camera.lookAtDirection;
             if (KeyBoardState.IsKeyDown(Keys.S))
                 camera.position -= 0.2f * camera.lookAtDirection;
+            if (KeyBoardState.IsKeyDown(Keys.Space))
+                camera.position += 0.2f * Vector3.UnitY;
+            if (KeyBoardState.IsKeyDown(Keys.LeftShift))
+                camera.position -= 0.2f * Vector3.UnitY;
+
 
             //scrollen om de fov te veranderen (in of uit te zoomen)
             camera.fov += 0.1f * MouseState.ScrollDelta.Y;
 
-
-            camera.angleX += sensitivity * MouseState.Delta.Y;
+            //looking around with mouse
+            camera.angleX -= sensitivity * MouseState.Delta.Y;
             camera.angleY += sensitivity * MouseState.Delta.X;
 
             camera.UpdateCamera();
@@ -177,6 +182,12 @@ namespace INFOGRTemplate
             Color3 diffuseColor = initialIntersect.primitive.color;
             List<Light> lightsReached = LightsReached(initialIntersect);
             Color3 finalColor = new Color3(0, 0, 0); //start off black
+            if (initialIntersect.primitive is Plane)
+            {
+                Plane plane = initialIntersect.primitive as Plane;
+                if (plane.checkers)
+                    diffuseColor = plane.checkerBoards(initialIntersect.closestIntersect);
+            }
 
             foreach (Light light in lightsReached) 
             {

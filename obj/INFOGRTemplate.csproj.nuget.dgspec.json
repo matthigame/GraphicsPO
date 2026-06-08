@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tobia\\Documents\\Git projects\\GraphicsRayTracer\\INFOGRTemplate.csproj": {}
+    "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\INFOGRTemplate.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tobia\\Documents\\Git projects\\GraphicsRayTracer\\INFOGRTemplate.csproj": {
+    "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\INFOGRTemplate.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tobia\\Documents\\Git projects\\GraphicsRayTracer\\INFOGRTemplate.csproj",
+        "projectUniqueName": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\INFOGRTemplate.csproj",
         "projectName": "INFOGRTemplate",
-        "projectPath": "C:\\Users\\tobia\\Documents\\Git projects\\GraphicsRayTracer\\INFOGRTemplate.csproj",
-        "packagesPath": "C:\\Users\\tobia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tobia\\Documents\\Git projects\\GraphicsRayTracer\\obj\\",
+        "projectPath": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\INFOGRTemplate.csproj",
+        "packagesPath": "C:\\Users\\rapha\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\tobia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rapha\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
