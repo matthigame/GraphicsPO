@@ -46,7 +46,7 @@ namespace INFOGRTemplate
             Sphere sphereElement2 = new Sphere(new Vector3(-2, 2, 6), 1.5f, new Color3(0, 1, 0), Materials.Reflective);
             Sphere sphereElement3 = new Sphere(new Vector3(2, 2, 6), 2, new Color3(0, 0, 0), Materials.Reflective);
 
-            Plane basePlane = new Plane(new Vector3(0, 1, 0), 1f, new Color3(0f, 0f, 0f), Materials.Diffuse, true); //floor
+            Plane basePlane = new Plane(new Vector3(0, 1, 0), 1f, new Color3(0.02f, 0.08f, 0.2f), Materials.Diffuse, true); //floor
             Plane wallPlane = new Plane(new Vector3(0, 0, -1), 20f, new Color3(0, 0, 0), Materials.Reflective, false); //backboard
 
             sceneElements.Add(sphereElement1);
@@ -60,9 +60,11 @@ namespace INFOGRTemplate
             //add all the lights in the scene
             List<Light> lightElements = new List<Light>();
             Light mainLight = new Light(new Vector3(-8, 25, 7), new Color3(600, 600, 600));
+            SpotLight spotLight = new SpotLight(new Vector3(-20, 2, 0), new Color3(300, 300, 300), new Vector3(1, -1, 0), 30);
             //Light secondaryLight = new Light(new Vector3(-5, 4, 12), new Color3(1, 1, 1));
             lightElements.Add(mainLight);
             //lightElements.Add(secondaryLight);
+            lightElements.Add(spotLight);
 
             scene = new Scene(sceneElements, lightElements);
 
@@ -195,7 +197,7 @@ namespace INFOGRTemplate
                 }
                 return DecidePixelColor(finalIntersect);
             }
-            return new Color3(0.5f, 0.5f, 0.5f);
+            return new Color3(58f/ 255f, 166f/255f, 242f/255f);
         }
         
         
@@ -221,7 +223,7 @@ namespace INFOGRTemplate
                               diffuseColor;
             }
 
-            finalColor += new Color3(0.05f, 0.05f, 0.05f); //add diffuse lighting
+            finalColor += new Color3(0.1f, 0.1f, 0.1f) * diffuseColor; //add diffuse lighting
             return finalColor;
         }
 
@@ -233,17 +235,17 @@ namespace INFOGRTemplate
             endPoints = new List<Vector3> ();
             ShadowRay shadowRay = null;
             List<Light> finalResult = new List<Light>();
-            foreach (Light light in scene.lightSources)
+            for (int j = 0; j < scene.lightSources.Count; j++)
             {
                 if (shadowRay == null) //first time in the loop
                 {
                     //shoot a ray from the intersect point to the light
-                    shadowRay = new ShadowRay(source.closestIntersect, Vector3.Normalize(light.location - source.closestIntersect));
+                    shadowRay = new ShadowRay(source.closestIntersect, Vector3.Normalize(scene.lightSources[j].location - source.closestIntersect));
                 }
                 else
                 {
                     shadowRay.startPosition = source.closestIntersect;
-                    shadowRay.direction = Vector3.Normalize(light.location - source.closestIntersect);
+                    shadowRay.direction = Vector3.Normalize(scene.lightSources[j].location - source.closestIntersect);
                 }
 
                 bool blocked = false;
@@ -253,7 +255,7 @@ namespace INFOGRTemplate
                     for (int i = 0; i < intersect.intersectCount; i++)
                     {
                         float distanceToIntersect = Vector3.Distance(intersect.intersectionPoints[i], shadowRay.startPosition);
-                        float distanceToLight = Vector3.Distance(source.closestIntersect, light.location);
+                        float distanceToLight = Vector3.Distance(source.closestIntersect, scene.lightSources[j].location);
                         if (distanceToLight > distanceToIntersect && distanceToIntersect > 0.0001f) //prevent intersection with self, and ignores intersection past the light
                         {
                             endPoints.Add(intersect.closestIntersect);
@@ -269,8 +271,17 @@ namespace INFOGRTemplate
 
                 if (!blocked)
                 {
-                    finalResult.Add(light);
-                    endPoints.Add(light.location);
+                    if (scene.lightSources[j] is SpotLight)
+                    {
+                        SpotLight spotLight = (SpotLight)scene.lightSources[j];
+                        if (spotLight.checkAngle(shadowRay.direction))
+                            finalResult.Add(scene.lightSources[j]);
+                    }
+                    else
+                    {
+                        finalResult.Add(scene.lightSources[j]);
+                        endPoints.Add(scene.lightSources[j].location);
+                    }
                 }
             }
             return finalResult;

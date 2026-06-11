@@ -30,6 +30,7 @@ namespace INFOGRTemplate
         {
             float scale = 1f;
 
+            // Create a new point to find the plane directions.
             float X = position.X + 1;
             float Y = position.Y;
             float Z;
@@ -43,12 +44,14 @@ namespace INFOGRTemplate
             Vector3 vVector = Vector3.Normalize(Vector3.Cross(uVector, normalVector));
             Vector3 target = hitPoint - position;
 
+            // Obtain the U and V directions of the plane in their respective directions.
             float vFac = Vector3.Dot(target, vVector);
             float uFac = Vector3.Dot(target, uVector);
 
             int U = (int)Math.Floor(uFac / scale);
             int V = (int)Math.Floor(vFac / scale);
 
+            // if the Tile is even, color it black (- the given color).
             bool Tile = ((U + V) % 2) == 0;
 
             if (Tile)
