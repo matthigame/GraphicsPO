@@ -7,8 +7,10 @@ namespace INFOGRTemplate
 {
     internal class PrimaryRay: Ray
     {
-        public PrimaryRay(Vector3 _startingPoint, Vector3 _direction) : base(_startingPoint, _direction)
-        { 
+        public int bounces;
+        public PrimaryRay(Vector3 _startingPoint, Vector3 _direction, int _bounces) : base(_startingPoint, _direction)
+        {
+            bounces = _bounces;
         }
     }
 }

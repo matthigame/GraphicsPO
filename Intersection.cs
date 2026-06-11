@@ -63,56 +63,77 @@ namespace INFOGRTemplate
             float scalar = 1;
             if (discriminant < 0) //no intersection
             {
-                NoIntersect();
+                intersectCount--;
             }
             else if (discriminant == 0) //one intersection
             {
                 intersectCount = 1;
                 scalar = (-b) / (2 * a); //quadratic equation without the discriminant, since it is 0
-                if (scalar < 0)
-                    NoIntersect();
 
                 float x = ray.startPosition.X + ray.direction.X * scalar;
                 float y = ray.startPosition.Y + ray.direction.Y * scalar;
                 float z = ray.startPosition.Z + ray.direction.Z * scalar;
                 intersectionPoints[0] = new Vector3(x, y, z);
-                closestIntersect = intersectionPoints[0];
+
+                bool intersect = true;
+                float distanceToIntersect = Vector3.Distance(intersectionPoints[0], ray.startPosition);
+                //check if the intersection is allowed
+                if (distanceToIntersect < 0.0001f || scalar < 0)
+                {
+                    intersectCount--;
+                    intersect = false;
+                }
+
+                if (intersect)
+                    closestIntersect = intersectionPoints[0];
             }
             else //two intersections
             {
                 intersectCount = 2;
                 scalar = ((-b) + (float)MathF.Sqrt(discriminant)) / (2 * a); //standard quadratic equation
-                if (scalar < 0)
-                    NoIntersect();
 
                 float x = ray.startPosition.X + ray.direction.X * scalar;
                 float y = ray.startPosition.Y + ray.direction.Y * scalar;
                 float z = ray.startPosition.Z + ray.direction.Z * scalar;
                 intersectionPoints[0] = new Vector3(x, y, z); //first intersection point
 
+                bool intersect1 = true;
+                float Distance1 = Vector3.Distance(intersectionPoints[0], ray.startPosition);
+                //check if the intersection is allowed
+                if (Distance1 < 0.0001f || scalar < 0)
+                {
+                    intersectCount--;
+                    intersect1 = false;
+                }
                 scalar = ((-b) - (float)MathF.Sqrt(discriminant)) / (2 * a);
-                if (scalar < 0)
-                    NoIntersect();
 
                 float x2 = ray.startPosition.X + ray.direction.X * scalar;
                 float y2 = ray.startPosition.Y + ray.direction.Y * scalar;
                 float z2 = ray.startPosition.Z + ray.direction.Z * scalar;
                 intersectionPoints[1] = new Vector3(x2, y2, z2); //second intersection point
 
-                //check which point is closest
-                float Distance1 = Vector3.Distance(intersectionPoints[0], ray.startPosition);
+                bool intersect2 = true;
                 float Distance2 = Vector3.Distance(intersectionPoints[1], ray.startPosition);
+                //check if the intersection is allowed
+                if (Distance1 < 0.0001f || scalar < 0)
+                {
+                    intersectCount--;
+                    intersect2 = false;
+                }
 
-                if (Distance1 <= Distance2) //return the intersection point where the distance to the starting point of the ray is the smallest
+                //check if only 1 of the intersects is allowed, if so choose the other
+                if (intersect1 && !intersect2)
                     closestIntersect = intersectionPoints[0];
-                else
+                else if (!intersect1 && intersect2)
                     closestIntersect = intersectionPoints[1];
+                else //if both are allowed return the intersection where the distance tot the starting point of the ray is the smallest
+                {
+                    if (Distance1 <= Distance2)
+                        closestIntersect = intersectionPoints[0];
+                    else
+                        closestIntersect = intersectionPoints[1];
+                }
             }
-        }
-
-        private void NoIntersect()
-        {
-            intersectCount--;
         }
 
         private void PlaneIntersect(Primitive primitive, Ray ray) 
