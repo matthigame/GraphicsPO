@@ -18,6 +18,7 @@ namespace INFOGRTemplate
     {
         Sphere,
         Plane,
+        Triangle
     }
 
     internal class Primitive

@@ -42,12 +42,18 @@ namespace INFOGRTemplate
         { 
             //add all the objects in the scene
             List<Primitive> sceneElements = new List<Primitive>();
-            Sphere sphereElement1 = new Sphere(new Vector3(-5, 0, 6), 1, new Color3(1, 0, 0), Materials.Diffuse);
-            Sphere sphereElement2 = new Sphere(new Vector3(-2, 0, 6), 1.5f, new Color3(0, 1, 0), Materials.Diffuse);
+            Sphere sphereElement1 = new Sphere(new Vector3(-5, 0, 6), 1, new Color3(1, 0, 0), Materials.Plastic);
+            Sphere sphereElement2 = new Sphere(new Vector3(-2, 0, 6), 1.5f, new Color3(0, 1, 0), Materials.Metallic);
             Sphere sphereElement3 = new Sphere(new Vector3(2, 0, 6), 2, new Color3(0, 0, 1), Materials.Diffuse);
 
-            Plane basePlane = new Plane(new Vector3(0, 1, 0), 1f, new Color3(0f, 0f, 0f), Materials.Diffuse, true); //floor
+            Plane basePlane = new Plane(new Vector3(0, 1, 0), 1f, new Color3(1f, 1f, 1f), Materials.Diffuse, true); //floor
             Plane wallPlane = new Plane(new Vector3(0, 0, -1), 20f, new Color3(0.2f, 0.4f, 0.8f), Materials.Diffuse, true); //backboard
+
+
+            Triangle triangle1 = new Triangle(new Color3(1, 1, 0), [new Vector3(0, 0, 3), new Vector3(1, 1, 3), new Vector3(0, 1, 3)], Materials.Diffuse);
+            Triangle triangle2 = new Triangle(new Color3(0, 1, 1), [new Vector3(0, 1, 3), new Vector3(1, 1, 3), new Vector3(0, 2, 3)], Materials.Diffuse);
+            Triangle triangle3 = new Triangle(new Color3(1, 0, 1), [new Vector3(0, 0, 3), new Vector3(0, 1, 3), new Vector3(-1, 1, 3)], Materials.Diffuse);
+            Triangle triangle4 = new Triangle(new Color3(1, 1, 1), [new Vector3(-1, 1, 3), new Vector3(0, 1, 3), new Vector3(0, 2, 3)], Materials.Diffuse);
 
             sceneElements.Add(sphereElement1);
             sceneElements.Add(sphereElement2);
@@ -57,9 +63,15 @@ namespace INFOGRTemplate
             sceneElements.Add(basePlane);
             sceneElements.Add(wallPlane);
 
+            sceneElements.Add(triangle1);
+            sceneElements.Add(triangle2);
+            sceneElements.Add(triangle3);
+            sceneElements.Add(triangle4);
+
+
             //add all the lights in the scene
             List<Light> lightElements = new List<Light>();
-            Light mainLight = new Light(new Vector3(-8, 25, 7), new Color3(600, 600, 600));
+            Light mainLight = new Light(new Vector3(0, 10, 0), new Color3(50, 50, 50));
             //Light secondaryLight = new Light(new Vector3(-5, 4, 12), new Color3(1, 1, 1));
             lightElements.Add(mainLight);
             //lightElements.Add(secondaryLight);
@@ -104,16 +116,6 @@ namespace INFOGRTemplate
                     n++;
 
 
-                    ////This is the ray for the debug
-                    //if (KeyBoardState.IsKeyDown(Keys.K))
-                    //{
-                    //    //n++;
-                    //    //if (pixelY % 15 == 0 && pixelX % 15 == 0)
-                    //    //{
-                    //    //    Vector2 startPosition = new Vector2(mainRay.startPosition.X, -mainRay.startPosition.Z) + debugOrigin;
-                    //    //    screen.Line((int)startPosition.X, (int)startPosition.Y, (int)startPosition.X + (int)(mainRay.direction.X * 750), (int)startPosition.Y + (int)(-mainRay.direction.Z * 750), new Color3(0, 0, 0));
-                    //    //}
-                    //}
 
                     //This is the actual ray
                     Color3 color = ShootRayThroughPixel(mainRay);
@@ -162,6 +164,7 @@ namespace INFOGRTemplate
             foreach(Primitive primitive in scene.primitives)
             {
                 Intersection intersection = primitive.Intersect(ray);
+
                 if (finalIntersect == null && intersection.Intersects)
                     finalIntersect = intersection;
                 else if (finalIntersect == null)
@@ -191,6 +194,26 @@ namespace INFOGRTemplate
 
             foreach (Light light in lightsReached) 
             {
+                //add the effects of glossy materials (plastic & metal)
+                if (initialIntersect.primitive.material == Materials.Plastic || initialIntersect.primitive.material == Materials.Metallic) 
+                {
+                    Vector3 toCamera = Vector3.Normalize(initialIntersect.ray.startPosition - initialIntersect.closestIntersect);
+                    Vector3 reflectedLight = Vector3.Normalize(Vector3.Reflect(initialIntersect.closestIntersect - light.location, initialIntersect.normalVector));
+                    float vrDot = Vector3.Dot(toCamera, reflectedLight);
+
+                    float glossyFactor = 10;
+
+                    Color3 glossColor;
+                    if (initialIntersect.primitive.material == Materials.Metallic)
+                        glossColor = initialIntersect.primitive.color; //metallic object reflect their own color
+                    else
+                        glossColor = new Color3(1, 1, 1); //plastic objects reflect white
+
+                    finalColor += light.intensity * (1 / (Vector3.Distance(initialIntersect.closestIntersect, light.location) * Vector3.Distance(initialIntersect.closestIntersect, light.location))) *
+                                  glossColor * MathF.Pow(MathF.Max(0, vrDot), glossyFactor);
+
+                }
+
                 //intensity*distance attenuation(1/r*r) modulated by the angle of the light and modulated by the diffuse color
                 finalColor += light.intensity *
                               (1 / (Vector3.Distance(initialIntersect.closestIntersect, light.location) * Vector3.Distance(initialIntersect.closestIntersect, light.location))) *
@@ -198,7 +221,7 @@ namespace INFOGRTemplate
                               diffuseColor;
             }
 
-            finalColor += new Color3(0.05f, 0.05f, 0.05f); //add diffuse lighting
+            finalColor += new Color3(0.1f, 0.1f, 0.1f); //add diffuse lighting
             return finalColor;
         }
 

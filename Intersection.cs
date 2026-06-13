@@ -19,14 +19,16 @@ namespace INFOGRTemplate
         public Primitive primitive;
         public float distance;
         public Vector3 normalVector;
+        public Ray ray;
         public Intersection(Primitive _primitive, Ray _ray)
         {
             intersectionPoints = new Vector3[2];
             this.primitive = _primitive;
+            this.ray = _ray;
             switch (_primitive.type)
             {
                 case PrimitiveTypes.Sphere:
-                    SphereIntersect(_primitive as Sphere, _ray);
+                    SphereIntersect(primitive as Sphere, ray);
 
                     //calculate the normal vector if we intersect
                     if (Intersects)
@@ -37,8 +39,12 @@ namespace INFOGRTemplate
                     break;
 
                 case PrimitiveTypes.Plane:
-                    PlaneIntersect(_primitive as Plane, _ray);
+                    PlaneIntersect(primitive as Plane, _ray);
                     //normalVector gets set in the plane intersection method
+                    break;
+                case PrimitiveTypes.Triangle:
+                    TriangleIntersect(primitive, ray);
+                    //normalVector gets set in the TriangleIntersect method
                     break;
             }
             if (Intersects)
@@ -118,37 +124,68 @@ namespace INFOGRTemplate
         private void PlaneIntersect(Primitive primitive, Ray ray) 
         {
             Plane plane = primitive as Plane;
-            //plug the x, y and z values of the ray into the plane equation (in parts to make it simpler on the eyes)
-            Vector3 vector1 = plane.normalVector * ray.startPosition;
-            float denominator = vector1.X + vector1.Y + vector1.Z + plane.equationD;
-            Vector3 vector2 = plane.normalVector * ray.direction;
-            float numerator = vector2.X + vector2.Y + vector2.Z;
 
-            float lambda = (-1 * denominator) / numerator;
+            var result = plane.intersectionPoint(ray.startPosition, ray.direction);
+            Vector3 intersectionPoint = result.Item1;
+            intersectCount = result.Item2;
 
-            if (numerator == 0 && denominator != 0) //no intersections
+            if (intersectCount > 0) 
+            {
+                closestIntersect = intersectionPoint;
+                intersectionPoints[0] = closestIntersect;
+                normalVector = plane.normalVector;
+            }
+        }
+
+        private void TriangleIntersect(Primitive primitive, Ray ray) 
+        { 
+            Triangle triangle = primitive as Triangle;
+
+
+            Plane trianglePlane = new Plane(triangle.normalVector, triangle.A, triangle.color, triangle.material, false);
+
+            //Debug.WriteLine($"Triangle A: {triangle.A}, B: {triangle.B}, C: {triangle.C}");
+            //Debug.WriteLine($"Ray origin: {ray.startPosition}, direction: {ray.direction}");
+            //Debug.WriteLine($"effectiveNormal: {effectiveNormal}");
+            //Debug.WriteLine($"equationD will be: {-(triangle.A * effectiveNormal).X + (triangle.A * effectiveNormal).Y + (triangle.A * effectiveNormal).Z}");
+
+            //Debug.WriteLine($"Plane equationD: {trianglePlane.equationD}, position: {trianglePlane.position}");
+
+            Intersection planeIntersect = trianglePlane.Intersect(ray);
+            //Debug.WriteLine($"Plane intersects: {planeIntersect.Intersects}, hit point: {planeIntersect.closestIntersect}");
+
+
+            if (planeIntersect.Intersects)
+            {
+                float check1 = Vector3.Dot(Vector3.Cross(triangle.B - triangle.A, planeIntersect.closestIntersect - triangle.A), triangle.normalVector);
+                float check2 = Vector3.Dot(Vector3.Cross(triangle.C - triangle.B, planeIntersect.closestIntersect - triangle.B), triangle.normalVector);
+                float check3 = Vector3.Dot(Vector3.Cross(triangle.A - triangle.C, planeIntersect.closestIntersect - triangle.C), triangle.normalVector);
+
+                if (check1 >= 0 &&
+                    check2 >= 0 && 
+                    check3 >= 0)   
+                {
+                    intersectCount++;
+                    closestIntersect = planeIntersect.closestIntersect;
+                    intersectionPoints[0] = closestIntersect;
+
+                    if (Vector3.Dot(ray.direction, triangle.normalVector) > 0)
+                        normalVector = -triangle.normalVector;
+                    else
+                        normalVector = triangle.normalVector;
+
+                }
+                else
+                {
+                    intersectCount = 0;
+                }
+            }
+            else //if we dont intersect the plane, we for sure dont intersect the triangle, so we dont calculate further
             {
                 intersectCount = 0;
-                return; //prevent division by 0
-            }
-            else if (numerator == 0 && denominator == 0) //ray lies in the plane: infinite intersection points
-            {
-                intersectCount = 1; //not the real number but does not matter here
-                return; //same thing here, we are NOT dividing by 0
-            }
-            else if (lambda < 1) //looking backwards
-            {
-                intersectCount = 0;
-                return;
-            }
-            else 
-            {
-                intersectCount = 1;
             }
 
-            closestIntersect = ray.startPosition + lambda*ray.direction; //we have found our intersect point. Yay!
-            intersectionPoints[0] = closestIntersect;
-            normalVector = plane.normalVector;
+
         }
     }
-}
+}  

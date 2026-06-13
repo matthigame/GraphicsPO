@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assimp;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -14,9 +15,9 @@ namespace INFOGRTemplate
         float distance;
         public float equationD;
         public bool checkers;
-        public Plane(Vector3 normal, float _distance, Color3 _color, Materials _material, bool _checkers) : base(_color, new Vector3(0, 0, 0), PrimitiveTypes.Plane, _material) 
+        public Plane(Vector3 _normal, float _distance, Color3 _color, Materials _material, bool _checkers) : base(_color, new Vector3(0, 0, 0), PrimitiveTypes.Plane, _material) 
         {
-            normalVector = normal;
+            normalVector = _normal;
             this.distance = _distance;
             checkers = _checkers;
 
@@ -24,6 +25,48 @@ namespace INFOGRTemplate
             base.position = referencePoint;
             Vector3 temp = referencePoint * normalVector;
             equationD = -(temp.X + temp.Y + temp.Z);
+        }
+
+        //alternative constructor where you can input a reference point instead of a distance
+        public Plane(Vector3 _normal, Vector3 _referencePoint, Color3 _color, Materials _material, bool _checkers) : base(_color, _referencePoint, PrimitiveTypes.Plane, _material)
+        {
+            normalVector = _normal;
+            checkers = _checkers;
+            Vector3 temp = _referencePoint * normalVector;
+            equationD = -(temp.X + temp.Y + temp.Z);
+        }
+
+        public (Vector3, int) intersectionPoint(Vector3 source, Vector3 direction)
+        {
+            direction = Vector3.Normalize(direction);
+            Vector3 vector1 = normalVector * source;
+            float denominator = Vector3.Dot(normalVector, direction);
+            Vector3 vector2 = normalVector * direction;
+            float numerator = Vector3.Dot(normalVector, source) + equationD;
+
+
+            float lambda = -numerator / denominator;
+
+
+            if (numerator == 0 && denominator != 0) //no intersections
+            {
+                return (default, 0);
+            }
+            else if (MathF.Abs(denominator) < 0.00001f) //ray lies in the plane: infinite intersection points
+            {
+                return (source, 1); //the source is the closest intersection point, and we only care about this point, so we act like we have only 1 intersection
+            }
+            else if (lambda <= 0) //looking backwards
+            {
+                return (default, 0); //the returned Vector should be ignored since the intersection count is 0
+            }
+            else
+            {
+                Vector3 intersect = source + lambda * direction; //we have found our intersect point. Yay!
+                //Debug.WriteLine($"lambda: {lambda}, source: {source}, direction: {direction}");
+                return (intersect, 1);
+            }
+
         }
 
         public Color3 checkerBoards(Vector3 hitPoint)
