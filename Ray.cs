@@ -8,10 +8,12 @@ namespace INFOGRTemplate
     internal class Ray
     {
         public Vector3 startPosition, direction;
+        public Vector3 nonNormalDirection;
         public Ray(Vector3 _startPosition, Vector3 _direction) 
         { 
             startPosition = _startPosition;
             direction = Vector3.Normalize(_direction);
+            nonNormalDirection = _direction;
         }
     }
 }

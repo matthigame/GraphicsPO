@@ -33,7 +33,7 @@ namespace INFOGRTemplate
             float radianX = angleX * (MathF.PI / 180f);
             float radianY = angleY * (MathF.PI / 180f);
 
-            lookAtDirection.X = (MathF.Sin(radianY) * MathF.Cos(radianX));
+            lookAtDirection.X = MathF.Sin(radianY) * MathF.Cos(radianX);
             lookAtDirection.Y = MathF.Sin(radianX );
             lookAtDirection.Z = MathF.Cos(radianY) * MathF.Cos(radianX);
             lookAtDirection = Vector3.Normalize(lookAtDirection);

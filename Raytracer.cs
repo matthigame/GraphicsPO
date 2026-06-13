@@ -22,7 +22,7 @@ namespace INFOGRTemplate
         public Surface screen;
         public Scene scene;
         public Camera camera;
-        public float sensitivity = 0.2f;
+        public float sensitivity = 3f;
         public KeyboardState KeyBoardState {  get; set; }
         public MouseState MouseState { get; set; }
         PrimaryRay mainRay;
@@ -42,12 +42,12 @@ namespace INFOGRTemplate
         { 
             //add all the objects in the scene
             List<Primitive> sceneElements = new List<Primitive>();
-            Sphere sphereElement1 = new Sphere(new Vector3(-5, 0, 6), 1, new Color3(1, 0, 0), Materials.Plastic);
-            Sphere sphereElement2 = new Sphere(new Vector3(-2, 0, 6), 1.5f, new Color3(0, 1, 0), Materials.Metallic);
-            Sphere sphereElement3 = new Sphere(new Vector3(2, 0, 6), 2, new Color3(0, 0, 1), Materials.Diffuse);
+            Sphere sphereElement1 = new Sphere(new Vector3(-5, 1, 6), 1, new Color3(1, 0, 0), Materials.Diffuse);
+            Sphere sphereElement2 = new Sphere(new Vector3(-2, 2, 6), 1.5f, new Color3(0, 1, 0), Materials.Reflective);
+            Sphere sphereElement3 = new Sphere(new Vector3(2, 2, 6), 2, new Color3(0, 0, 0), Materials.Reflective);
 
-            Plane basePlane = new Plane(new Vector3(0, 1, 0), 1f, new Color3(1f, 1f, 1f), Materials.Diffuse, true); //floor
-            Plane wallPlane = new Plane(new Vector3(0, 0, -1), 20f, new Color3(0.2f, 0.4f, 0.8f), Materials.Diffuse, true); //backboard
+            Plane basePlane = new Plane(new Vector3(0, 1, 0), 1f, new Color3(0.02f, 0.08f, 0.2f), Materials.Diffuse, true); //floor
+            Plane wallPlane = new Plane(new Vector3(0, 0, -1), 20f, new Color3(0, 0, 0), Materials.Reflective, false); //backboard
 
 
             Triangle triangle1 = new Triangle(new Color3(1, 1, 0), [new Vector3(0, 0, 3), new Vector3(1, 1, 3), new Vector3(0, 1, 3)], Materials.Diffuse);
@@ -71,10 +71,12 @@ namespace INFOGRTemplate
 
             //add all the lights in the scene
             List<Light> lightElements = new List<Light>();
-            Light mainLight = new Light(new Vector3(0, 10, 0), new Color3(50, 50, 50));
+            Light mainLight = new Light(new Vector3(-8, 25, 7), new Color3(600, 600, 600));
+            SpotLight spotLight = new SpotLight(new Vector3(-20, 2, 0), new Color3(300, 300, 300), new Vector3(1, -1, 0), 30);
             //Light secondaryLight = new Light(new Vector3(-5, 4, 12), new Color3(1, 1, 1));
             lightElements.Add(mainLight);
             //lightElements.Add(secondaryLight);
+            lightElements.Add(spotLight);
 
             scene = new Scene(sceneElements, lightElements);
 
@@ -100,7 +102,7 @@ namespace INFOGRTemplate
                     direction = Vector3.Normalize(direction);
                     if (mainRay == null) //the first time, the ray has to be instantiated
                     {
-                        mainRay = new PrimaryRay(camera.position, direction);
+                        mainRay = new PrimaryRay(camera.position, direction, 10);
                     }
                     else
                     {
@@ -111,16 +113,19 @@ namespace INFOGRTemplate
                     //add 1 in 15 rays of the middle screen row to a list to display in the debug screen
                     if (pixelX % 15 == 0 && pixelY == screen.height/2)
                     {
-                        primaryRays.Add(new PrimaryRay(camera.position, direction));
+                        primaryRays.Add(new PrimaryRay(camera.position, direction, 10));
                     }
                     n++;
 
 
 
                     //This is the actual ray
-                    Color3 color = ShootRayThroughPixel(mainRay);
-                    if (color != -1)
-                        screen.Plot(pixelX, pixelY, color);
+                    if (!KeyBoardState.IsKeyDown(Keys.K))
+                    {
+                        Color3 color = ShootRayThroughPixel(mainRay);
+                        if (color != -1)
+                            screen.Plot(pixelX, pixelY, color);
+                    }
                 }
             }
 
@@ -147,8 +152,18 @@ namespace INFOGRTemplate
             camera.fov += 0.1f * MouseState.ScrollDelta.Y;
 
             //looking around with mouse
-            camera.angleX -= sensitivity * MouseState.Delta.Y;
-            camera.angleY += sensitivity * MouseState.Delta.X;
+            //camera.angleX -= sensitivity * MouseState.Delta.Y;
+            //camera.angleY += sensitivity * MouseState.Delta.X;
+
+            //looking around with arrow keys
+            if (KeyBoardState.IsKeyDown(Keys.Up))
+                camera.angleX += sensitivity;
+            if (KeyBoardState.IsKeyDown(Keys.Down))
+                camera.angleX -= sensitivity;
+            if (KeyBoardState.IsKeyDown(Keys.Right))
+                camera.angleY += sensitivity;
+            if (KeyBoardState.IsKeyDown(Keys.Left))
+                camera.angleY -= sensitivity;
 
             camera.UpdateCamera();
 
@@ -169,16 +184,26 @@ namespace INFOGRTemplate
                     finalIntersect = intersection;
                 else if (finalIntersect == null)
                     continue;
-                else if (intersection.Intersects && ClosestIntersect(finalIntersect, intersection))
+                else if (intersection.Intersects && ClosestIntersect(finalIntersect, intersection) )
                     finalIntersect = intersection;
             }
 
-
-            if (finalIntersect != null) 
+            if (finalIntersect != null)
+            {
+                //If the material is reflective, shoot the reflected ray and replace the final intersection
+                if (finalIntersect.primitive.material == Materials.Reflective && ray.bounces > 0)
+                {
+                    //black mirror reflects everything normally, coloured mirrors add their color to the final colour
+                    if (finalIntersect.primitive.color != new Color3(0, 0, 0))
+                        return finalIntersect.primitive.color * ShootRayThroughPixel(new PrimaryRay(finalIntersect.closestIntersect, Vector3.Reflect(ray.direction, finalIntersect.normalVector), ray.bounces - 1));
+                    return ShootRayThroughPixel(new PrimaryRay(finalIntersect.closestIntersect, Vector3.Reflect(ray.direction, finalIntersect.normalVector), ray.bounces - 1));
+                }
                 return DecidePixelColor(finalIntersect);
-            return -1;
-
+            }
+            return new Color3(58f/ 255f, 166f/255f, 242f/255f);
         }
+        
+        
 
         private Color3 DecidePixelColor(Intersection initialIntersect)
         {
@@ -221,7 +246,7 @@ namespace INFOGRTemplate
                               diffuseColor;
             }
 
-            finalColor += new Color3(0.1f, 0.1f, 0.1f); //add diffuse lighting
+            finalColor += new Color3(0.1f, 0.1f, 0.1f) * diffuseColor; //add diffuse lighting
             return finalColor;
         }
 
@@ -233,17 +258,17 @@ namespace INFOGRTemplate
             endPoints = new List<Vector3> ();
             ShadowRay shadowRay = null;
             List<Light> finalResult = new List<Light>();
-            foreach (Light light in scene.lightSources)
+            for (int j = 0; j < scene.lightSources.Count; j++)
             {
                 if (shadowRay == null) //first time in the loop
                 {
                     //shoot a ray from the intersect point to the light
-                    shadowRay = new ShadowRay(source.closestIntersect, Vector3.Normalize(light.location - source.closestIntersect));
+                    shadowRay = new ShadowRay(source.closestIntersect, Vector3.Normalize(scene.lightSources[j].location - source.closestIntersect));
                 }
                 else
                 {
                     shadowRay.startPosition = source.closestIntersect;
-                    shadowRay.direction = Vector3.Normalize(light.location - source.closestIntersect);
+                    shadowRay.direction = Vector3.Normalize(scene.lightSources[j].location - source.closestIntersect);
                 }
 
                 bool blocked = false;
@@ -253,7 +278,7 @@ namespace INFOGRTemplate
                     for (int i = 0; i < intersect.intersectCount; i++)
                     {
                         float distanceToIntersect = Vector3.Distance(intersect.intersectionPoints[i], shadowRay.startPosition);
-                        float distanceToLight = Vector3.Distance(source.closestIntersect, light.location);
+                        float distanceToLight = Vector3.Distance(source.closestIntersect, scene.lightSources[j].location);
                         if (distanceToLight > distanceToIntersect && distanceToIntersect > 0.0001f) //prevent intersection with self, and ignores intersection past the light
                         {
                             endPoints.Add(intersect.closestIntersect);
@@ -269,8 +294,17 @@ namespace INFOGRTemplate
 
                 if (!blocked)
                 {
-                    finalResult.Add(light);
-                    endPoints.Add(light.location);
+                    if (scene.lightSources[j] is SpotLight)
+                    {
+                        SpotLight spotLight = (SpotLight)scene.lightSources[j];
+                        if (spotLight.checkAngle(shadowRay.direction))
+                            finalResult.Add(scene.lightSources[j]);
+                    }
+                    else
+                    {
+                        finalResult.Add(scene.lightSources[j]);
+                        endPoints.Add(scene.lightSources[j].location);
+                    }
                 }
             }
             return finalResult;
@@ -289,6 +323,7 @@ namespace INFOGRTemplate
             Vector2 debugOrigin = new Vector2(screen.width / 2 - camera.position.X, 300 + camera.position.Z);
             Vector2 offset = new Vector2(-camera.position.X, camera.position.Z);
             int scalar = 30;
+
 
             //planes should be drawn before the spheres, so that the spheres dont turn invisible
             foreach (Primitive primitive in scene.primitives)
@@ -311,7 +346,7 @@ namespace INFOGRTemplate
 
             foreach (Primitive primitive in scene.primitives) //draw each primitive in the scene
             {
-
+                
                 if (primitive is Sphere) //draw every sphere as a circle
                 {
                     Sphere sphereToDraw = primitive as Sphere;
@@ -348,8 +383,8 @@ namespace INFOGRTemplate
 
 
                 //translate to debug coordinates
-                Vector2 debugStart = scalar * DebugPos(primaryRay.startPosition) + debugOrigin;
-                Vector2 debugEnd = scalar * DebugPos(endpoint) + debugOrigin;
+                Vector2 debugStart = DebugPos(primaryRay.startPosition) + debugOrigin;
+                Vector2 debugEnd = debugOrigin + scalar * (DebugPos(endpoint) + offset);
 
 
                 screen.Line((int)debugStart.X, (int)debugStart.Y, (int)debugEnd.X, (int)debugEnd.Y, new Color3(0.5f, 0f, 0f)); //draw the ray
@@ -357,11 +392,11 @@ namespace INFOGRTemplate
                 //now draw the shadow rays from each intersection
                 if (finalIntersect != null)
                 {
-                    debugStart = scalar * DebugPos(finalIntersect.closestIntersect) + debugOrigin;
+                    debugStart = scalar * (DebugPos(finalIntersect.closestIntersect) + offset) + debugOrigin;
                     List<Light> lights = LightsReached(finalIntersect); //during this method the endPoints list is updated
                     foreach (Vector3 endPoint in endPoints)
                     { 
-                        debugEnd = scalar * DebugPos(endPoint) + debugOrigin;
+                        debugEnd = scalar * (DebugPos(endPoint) + offset) + debugOrigin;
                         screen.Line((int)debugStart.X, (int)debugStart.Y, (int)debugEnd.X, (int)debugEnd.Y, new Color3(0.8f, 0.8f, 0)); //draw the shadow ray
                     }
                 }
@@ -378,7 +413,7 @@ namespace INFOGRTemplate
                         //offset are * (1+i) in order to get two rings with a 1/2 radius ratio
                         float x_offset = (1+i) * 0.25f * (float)Math.Cos(angle * (Math.PI / 180));
                         float y_offset = (1+i) * 0.25f * (float)Math.Sin(angle * (Math.PI / 180));
-                        Vector2 vectortodraw = debugOrigin + scalar * (DebugPos(light.location) + new Vector2(x_offset, y_offset) + offset);
+                        Vector2 vectortodraw = debugOrigin + scalar * (DebugPos(light.location) + new Vector2(x_offset, y_offset));
                         screen.Plot((int)vectortodraw.X, (int)vectortodraw.Y, light.intensity); //draw the desired pixel
                     }
                 }

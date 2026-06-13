@@ -1,5 +1,6 @@
 using INFOGRTemplate;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System.Diagnostics;
 using System.Globalization;
@@ -26,6 +27,7 @@ namespace Template
             raytracer = new Raytracer(screen);
             // (optional) example of how you can load a triangle mesh in any file format supported by Assimp
             object? mesh = Util.ImportMesh("../../../assets/cube.obj");
+            
         }
         // tick: renders one frame
         private TimeSpan deltaTime = new();
