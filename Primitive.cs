@@ -12,6 +12,7 @@ namespace INFOGRTemplate
         Plastic,
         Metallic,
         Reflective,
+        Refractive,
     }
 
     enum PrimitiveTypes
@@ -27,6 +28,9 @@ namespace INFOGRTemplate
         public Vector3 position;
         public PrimitiveTypes type;
         public Materials material;
+
+
+        public float refraction_index = 1.52f; //An objects default refractiveness is that of glass (thus making the default refractive material glass)
 
         public Primitive(Color3 _color, Vector3 _position, PrimitiveTypes _type, Materials _material)
         {

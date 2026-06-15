@@ -162,18 +162,9 @@ namespace INFOGRTemplate
         { 
             Triangle triangle = primitive as Triangle;
 
-
             Plane trianglePlane = new Plane(triangle.normalVector, triangle.A, triangle.color, triangle.material, false);
 
-            //Debug.WriteLine($"Triangle A: {triangle.A}, B: {triangle.B}, C: {triangle.C}");
-            //Debug.WriteLine($"Ray origin: {ray.startPosition}, direction: {ray.direction}");
-            //Debug.WriteLine($"effectiveNormal: {effectiveNormal}");
-            //Debug.WriteLine($"equationD will be: {-(triangle.A * effectiveNormal).X + (triangle.A * effectiveNormal).Y + (triangle.A * effectiveNormal).Z}");
-
-            //Debug.WriteLine($"Plane equationD: {trianglePlane.equationD}, position: {trianglePlane.position}");
-
             Intersection planeIntersect = trianglePlane.Intersect(ray);
-            //Debug.WriteLine($"Plane intersects: {planeIntersect.Intersects}, hit point: {planeIntersect.closestIntersect}");
 
 
             if (planeIntersect.Intersects)
