@@ -42,15 +42,6 @@ namespace Template
             raytracer.KeyBoardState = KeyBoardState;
             raytracer.MouseState = MouseState;
 
-            for (int row = 0; row < screen.height; row++)
-            {
-                for (int column = 0; column < screen.width; column++)
-                {
-                    // REPLACE THIS WITH THE CORRECT COLOR FOR THIS PIXEL FROM YOUR RAY TRACER
-                    screen.Plot(column, row, new Color3(0.5f, 0.5f, 0.5f));
-                }
-            }
-
             raytracer.Render(); //render every tick
 
             deltaTime += timer.Elapsed;
