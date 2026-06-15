@@ -49,7 +49,7 @@ namespace INFOGRTemplate
         { 
             //add all the objects in the scene
             List<Primitive> sceneElements = new List<Primitive>();
-            Sphere sphereElement1 = new Sphere(new Vector3(-5, 1, 6), 1, new Color3(1, 0, 0), Materials.Diffuse, false);
+            Sphere sphereElement1 = new Sphere(new Vector3(-5, 1, 6), 1, new Color3(1, 0, 0), Materials.Diffuse, true);
             Sphere sphereElement2 = new Sphere(new Vector3(-2, 2, 6), 1.5f, new Color3(0, 1, 0), Materials.Diffuse, false);
             Sphere sphereElement3 = new Sphere(new Vector3(2, 2, 6), 2, new Color3(0, 0, 0), Materials.Reflective, false);
 
@@ -57,10 +57,10 @@ namespace INFOGRTemplate
             Plane wallPlane = new Plane(new Vector3(0, 0, -1), 20f, new Color3(0.4f, 0.1f, 0.7f), Materials.Metallic, false); //backboard
 
 
-            Triangle triangle1 = new Triangle(new Color3(1, 1, 1), [new Vector3(-2, 0, 3), new Vector3(2, 0, 3), new Vector3(0, 2, 3)], Materials.Refractive);
-            //Triangle triangle2 = new Triangle(new Color3(0, 1, 1), [new Vector3(0, 1, 3), new Vector3(1, 1, 3), new Vector3(0, 2, 3)], Materials.Diffuse);
-            //Triangle triangle3 = new Triangle(new Color3(1, 0, 1), [new Vector3(0, 0, 3), new Vector3(0, 1, 3), new Vector3(-1, 1, 3)], Materials.Diffuse);
-            //Triangle triangle4 = new Triangle(new Color3(1, 1, 1), [new Vector3(-1, 1, 3), new Vector3(0, 1, 3), new Vector3(0, 2, 3)], Materials.Diffuse);
+            Triangle triangle1 = new Triangle(new Color3(0, 0, 0), [new Vector3(-2, 0, 3), new Vector3(2, 0, 3), new Vector3(0, 2, 3)], Materials.Diffuse, true);
+            //Triangle triangle2 = new Triangle(new Color3(0, 1, 1), [new Vector3(0, 1, 3), new Vector3(1, 1, 3), new Vector3(0, 2, 3)], Materials.Diffuse, false);
+            //Triangle triangle3 = new Triangle(new Color3(1, 0, 1), [new Vector3(0, 0, 3), new Vector3(0, 1, 3), new Vector3(-1, 1, 3)], Materials.Diffuse, false);
+            //Triangle triangle4 = new Triangle(new Color3(1, 1, 1), [new Vector3(-1, 1, 3), new Vector3(0, 1, 3), new Vector3(0, 2, 3)], Materials.Diffuse, false);
 
             sceneElements.Add(sphereElement1);
             sceneElements.Add(sphereElement2);
@@ -70,7 +70,7 @@ namespace INFOGRTemplate
             sceneElements.Add(basePlane);
             sceneElements.Add(wallPlane);
 
-            //sceneElements.Add(triangle1);
+            sceneElements.Add(triangle1);
             //sceneElements.Add(triangle2);
             //sceneElements.Add(triangle3);
             //sceneElements.Add(triangle4);
@@ -301,7 +301,14 @@ namespace INFOGRTemplate
                 if (sphere.checkers)
                 {
                     diffuseColor = sphere.checkerBoards(initialIntersect.closestIntersect, initialIntersect.normalVector, Vector3.Distance(camera.position, initialIntersect.closestIntersect));
-                    //Debug.WriteLine(diffuseColor);
+                }
+            }
+            else if (initialIntersect.primitive is Triangle)
+            {
+                Triangle triangle = initialIntersect.primitive as Triangle;
+                if (triangle.checkers)
+                {
+                    diffuseColor = triangle.checkerBoards(initialIntersect.closestIntersect);
                 }
             }
 

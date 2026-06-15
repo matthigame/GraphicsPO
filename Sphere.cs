@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Numerics;
 using System.Text;
@@ -45,33 +46,19 @@ namespace INFOGRTemplate
 
         public Color3 checkerBoards(Vector3 hitPoint, Vector3 normalVector, float distance)
         {
-            float scale = 1f;
+            float scale = 10f;
 
-            Vector3 referencePoint = distance * -normalVector;
-            base.position = referencePoint;
-            Vector3 temp = referencePoint * normalVector;
-            float equationD = -(temp.X + temp.Y + temp.Z);
+            //calculate the radians
+            float U_Rad = MathF.Acos(normalVector.Z);
+            float V_Rad = MathF.Asin(normalVector.Y / MathF.Sin(U_Rad));
 
-            // Create a new point to find the plane directions.
-            float X = position.X + 1;
-            float Y = position.Y;
-            float Z;
-            if (normalVector.Z == 0)
-                Z = position.Z;
-            else
-                Z = -(normalVector.X * X + normalVector.Y * Y + equationD) / normalVector.Z;
+            //make the radians into angles
+            float U_Angle = U_Rad * (180 / MathF.PI);
+            float V_Angle = V_Rad * (180 / MathF.PI);
 
-            Vector3 secPoint = new Vector3(X, Y, Z);
-            Vector3 uVector = Vector3.Normalize(secPoint - position);
-            Vector3 vVector = Vector3.Normalize(Vector3.Cross(uVector, normalVector));
-            Vector3 target = hitPoint - position;
-
-            // Obtain the U and V directions of the plane in their respective directions.
-            float vFac = Vector3.Dot(target, vVector);
-            float uFac = Vector3.Dot(target, uVector);
-
-            int U = (int)Math.Floor(uFac / scale);
-            int V = (int)Math.Floor(vFac / scale);
+            //place them onto the grid
+            int U = (int)Math.Floor(U_Angle / scale);
+            int V = (int)Math.Floor(V_Angle / scale);
 
             // if the Tile is even, color it black (- the given color).
             bool Tile = ((U + V) % 2) == 0;
