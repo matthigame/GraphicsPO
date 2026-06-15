@@ -1,62 +1,74 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\",
+  "WorkspaceRootPath": "C:\\Users\\matth\\source\\repos\\GraphPO\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\raytracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:raytracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\triangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:triangle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\sphere.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:sphere.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\spotlight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:spotlight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\surface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:surface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\myapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:myapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\intersection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:intersection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\primitive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:primitive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\color.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:color.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\template.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:template.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\rapha\\source\\repos\\graphicspo\\application.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\raytracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:raytracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\sphere.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:sphere.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\primitive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:primitive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\intersection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:intersection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\myapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:myapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\primaryray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:primaryray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\application.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:application.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\template.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:template.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\shadowray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:shadowray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\surface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:surface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\color.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:color.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,17 +78,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Raytracer.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Raytracer.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Raytracer.cs",
               "RelativeDocumentMoniker": "Raytracer.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Raytracer.cs*",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Raytracer.cs*",
               "RelativeToolTip": "Raytracer.cs*",
-              "ViewState": "AgIAAK8AAAAAAAAAAAAAAHwAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAPsAAAAAAAAAAIAwwBoBAABdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T07:45:03.225Z",
               "IsPinned": true,
@@ -84,52 +96,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 1,
               "Title": "Camera.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Camera.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Camera.cs",
               "RelativeDocumentMoniker": "Camera.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Camera.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Camera.cs",
               "RelativeToolTip": "Camera.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACEAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T07:43:33.249Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "Intersection.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Intersection.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Intersection.cs",
               "RelativeDocumentMoniker": "Intersection.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Intersection.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Intersection.cs",
               "RelativeToolTip": "Intersection.cs",
-              "ViewState": "AgIAAHAAAAAAAAAAAAA1wI4AAAANAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwBQAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T07:44:47.912Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "Primitive.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Primitive.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Primitive.cs",
               "RelativeDocumentMoniker": "Primitive.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Primitive.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Primitive.cs",
               "RelativeToolTip": "Primitive.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwA0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T07:43:57.059Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Plane.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Plane.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Plane.cs",
               "RelativeDocumentMoniker": "Plane.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Plane.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Plane.cs",
               "RelativeToolTip": "Plane.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAqwCwAAABMAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwB4AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T09:19:53.362Z",
               "IsPinned": true,
@@ -137,84 +151,131 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Ray.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Ray.cs",
-              "RelativeDocumentMoniker": "Ray.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Ray.cs",
-              "RelativeToolTip": "Ray.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAsAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "Triangle.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Triangle.cs",
+              "RelativeDocumentMoniker": "Triangle.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Triangle.cs*",
+              "RelativeToolTip": "Triangle.cs*",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwA4AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T18:08:55.067Z",
+              "WhenOpened": "2026-06-15T17:14:02.192Z",
+              "IsPinned": true,
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SpotLight.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\SpotLight.cs",
-              "RelativeDocumentMoniker": "SpotLight.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\SpotLight.cs",
-              "RelativeToolTip": "SpotLight.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T17:16:58.267Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Sphere.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Sphere.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Sphere.cs",
               "RelativeDocumentMoniker": "Sphere.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Sphere.cs",
-              "RelativeToolTip": "Sphere.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAowB8AAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Sphere.cs*",
+              "RelativeToolTip": "Sphere.cs*",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwBUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T09:19:43.418Z"
+              "WhenOpened": "2026-06-02T09:19:43.418Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
+              "Title": "readme.txt",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\readme.txt",
+              "RelativeDocumentMoniker": "readme.txt",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\readme.txt",
+              "RelativeToolTip": "readme.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-06-12T10:49:44.6Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ShadowRay.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\ShadowRay.cs",
+              "RelativeDocumentMoniker": "ShadowRay.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\ShadowRay.cs",
+              "RelativeToolTip": "ShadowRay.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T13:16:39.906Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PrimaryRay.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\PrimaryRay.cs",
+              "RelativeDocumentMoniker": "PrimaryRay.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\PrimaryRay.cs",
+              "RelativeToolTip": "PrimaryRay.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T13:16:22.214Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Ray.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Ray.cs",
+              "RelativeDocumentMoniker": "Ray.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Ray.cs",
+              "RelativeToolTip": "Ray.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAASwAoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T13:15:04.738Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "surface.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\surface.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\surface.cs",
               "RelativeDocumentMoniker": "surface.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\surface.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\surface.cs",
               "RelativeToolTip": "surface.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwCkAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAewG8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T06:35:42.664Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "MyApplication.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\MyApplication.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\MyApplication.cs",
               "RelativeDocumentMoniker": "MyApplication.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\MyApplication.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\MyApplication.cs",
               "RelativeToolTip": "MyApplication.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAowAMAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAkwC4AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T06:35:38.428Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "template.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\template.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\template.cs",
               "RelativeDocumentMoniker": "template.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\template.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\template.cs",
               "RelativeToolTip": "template.cs",
-              "ViewState": "AgIAAJsAAAAAAAAAAAAgwLAAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAAEAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T06:35:43.505Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 11,
               "Title": "Application.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Application.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Application.cs",
               "RelativeDocumentMoniker": "Application.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Application.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Application.cs",
               "RelativeToolTip": "Application.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -222,11 +283,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "Scene.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Scene.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Scene.cs",
               "RelativeDocumentMoniker": "Scene.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\Scene.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Scene.cs",
               "RelativeToolTip": "Scene.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -234,13 +295,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 16,
               "Title": "color.cs",
-              "DocumentMoniker": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\color.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\color.cs",
               "RelativeDocumentMoniker": "color.cs",
-              "ToolTip": "C:\\Users\\rapha\\source\\repos\\GraphicsPO\\color.cs",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\color.cs",
               "RelativeToolTip": "color.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGoAAAAAAAAAAAA5wAwAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T06:35:34.798Z"
             }
