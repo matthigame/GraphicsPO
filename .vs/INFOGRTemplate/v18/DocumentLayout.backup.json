@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\matth\\source\\repos\\GraphPO\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\raytracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:raytracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\sphere.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:sphere.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\raytracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:raytracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\primitive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,16 +23,20 @@
       "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:intersection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\myapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:myapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|solutionrelative:ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5DF4789A-96A4-4DA5-9364-FCF2EAB1B414}|INFOGRTemplate.csproj|c:\\users\\matth\\source\\repos\\graphpo\\primaryray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -74,17 +74,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Raytracer.cs",
               "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Raytracer.cs",
               "RelativeDocumentMoniker": "Raytracer.cs",
-              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Raytracer.cs*",
-              "RelativeToolTip": "Raytracer.cs*",
-              "ViewState": "AgIAAKsAAAAAAAAAAAAawMAAAAANAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Raytracer.cs",
+              "RelativeToolTip": "Raytracer.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAApwHAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T07:45:03.225Z",
               "IsPinned": true,
@@ -92,33 +92,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Camera.cs",
               "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Camera.cs",
               "RelativeDocumentMoniker": "Camera.cs",
               "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Camera.cs",
               "RelativeToolTip": "Camera.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAuwC4AAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACEAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T07:43:33.249Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Intersection.cs",
               "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Intersection.cs",
               "RelativeDocumentMoniker": "Intersection.cs",
               "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Intersection.cs",
               "RelativeToolTip": "Intersection.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAgwCYAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwBQAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T07:44:47.912Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Primitive.cs",
               "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Primitive.cs",
               "RelativeDocumentMoniker": "Primitive.cs",
@@ -144,13 +144,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Sphere.cs",
               "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Sphere.cs",
               "RelativeDocumentMoniker": "Sphere.cs",
-              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Sphere.cs",
-              "RelativeToolTip": "Sphere.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAAlAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Sphere.cs*",
+              "RelativeToolTip": "Sphere.cs*",
+              "ViewState": "AgIAABwAAAAAAAAAAAAuwDgAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T09:19:43.418Z",
               "IsPinned": true,
@@ -161,8 +161,12 @@
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "readme.txt",
               "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\readme.txt",
               "RelativeDocumentMoniker": "readme.txt",
@@ -198,13 +202,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "Ray.cs",
               "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\Ray.cs",
               "RelativeDocumentMoniker": "Ray.cs",
               "ToolTip": "C:\\Users\\matth\\source\\repos\\GraphPO\\Ray.cs",
               "RelativeToolTip": "Ray.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAASwAsAAAA/AAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAASwAoAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-11T13:15:04.738Z"
             },
@@ -222,7 +226,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "MyApplication.cs",
               "DocumentMoniker": "C:\\Users\\matth\\source\\repos\\GraphPO\\MyApplication.cs",
               "RelativeDocumentMoniker": "MyApplication.cs",
