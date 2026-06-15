@@ -1,7 +1,7 @@
 Team members: (names and student IDs)
-* ...
-* ...
-* ...
+* 0898503, Matthias Nijman
+* 2541165 Tobias te Velde
+* xxxxxxx Raphael Hurink
 
 Tick the boxes below for the implemented features. Add a brief note only if necessary, e.g., if it's only partially working, or how to turn it on.
 
@@ -10,20 +10,20 @@ Formalities:
 [ ] Cleaned (no obj/bin folders)
 
 Minimum requirements implemented:
-[ ] Camera: position and orientation controls, field of view in degrees
+[X] Camera: position and orientation controls, field of view in degrees
 Controls: ...
-[ ] Primitives: plane, sphere
-[ ] Lights: at least 2 point lights, additive contribution, shadows without "acne"
-[ ] Diffuse shading: (N.L), distance attenuation
-[ ] Phong shading: (R.V) or (N.H), exponent
-[ ] Diffuse color texture: only required on the plane primitive, image or procedural, (u,v) texture coordinates
-[ ] Mirror reflection: recursive
+[X] Primitives: plane, sphere
+[X] Lights: at least 2 point lights, additive contribution, shadows without "acne"
+[X] Diffuse shading: (N.L), distance attenuation
+[X] Phong shading: (R.V) or (N.H), exponent
+[X] Diffuse color texture: only required on the plane primitive, image or procedural, (u,v) texture coordinates
+[X] Mirror reflection: recursive
 [ ] Debug visualization: sphere primitives, rays (primary, shadow, reflected, refracted)
 
 Bonus features implemented:
-[ ] Triangle primitives: must use the algorithm from the lectures, single triangles or meshes
+[X] Triangle primitives: must use the algorithm from the lectures, single triangles or meshes
 [ ] Interpolated normals: only required on triangle primitives, 3 different vertex normals must be specified
-[ ] Spot lights: smooth falloff optional
+[X] Spot lights: smooth falloff optional
 [ ] Glossy reflections: not only of light sources but of other objects
 [ ] Anti-aliasing
 [ ] Parallelized
