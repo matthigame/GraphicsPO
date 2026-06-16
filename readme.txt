@@ -42,5 +42,5 @@ Method: ... (for example: fragment shader, compute shader, ILGPU, or CUDA)
 
 Notes:
 You turn on the debug screen by holding the K key
-You turn on anti-aliasing by holding the A key
+You turn on anti-aliasing by holding the F key
 For the textures we have implemented a checkerboard texture on every primitive.
