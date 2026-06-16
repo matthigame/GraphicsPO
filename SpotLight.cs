@@ -19,16 +19,16 @@ namespace INFOGRTemplate
 
         public bool checkAngle(Vector3 ray)
         {
-            // Necessities for the calculation of the radian angle.
+            // Necessities for the calculation of the radian angle
             float dot = Vector3.Dot(-ray, direction);
             float RayMag = ray.Length();
             float DirectMag = direction.Length();
 
-            // Calculate the radian angle between the incoming shadowray and the direction of the spotlight.
+            // Calculate the radian angle between the incoming shadowray and the direction of the spotlight
             float rayForm = dot / (RayMag * DirectMag);
             float rayRad = MathF.Acos(rayForm);
 
-            // Check if that angle falls in the bounds of the spotlight's cone.
+            // Check if said angle falls in the bounds of the spotlight's cone
             return rayRad < angle * MathF.PI / 180;
         }
     }

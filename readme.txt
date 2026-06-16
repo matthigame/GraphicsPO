@@ -1,7 +1,7 @@
 Team members: (names and student IDs)
 * 0898503, Matthias Nijman
 * 2541165 Tobias te Velde
-* xxxxxxx Raphael Hurink
+* 2531062 Raphael Hurink
 
 Tick the boxes below for the implemented features. Add a brief note only if necessary, e.g., if it's only partially working, or how to turn it on.
 
@@ -25,7 +25,7 @@ Bonus features implemented:
 [ ] Interpolated normals: only required on triangle primitives, 3 different vertex normals must be specified
 [X] Spot lights: smooth falloff optional
 [ ] Glossy reflections: not only of light sources but of other objects
-[ ] Anti-aliasing
+[X] Anti-aliasing
 [ ] Parallelized
 Method: ... (for example: parallel-for, async tasks, or threads)
 [ ] Textures: on all implemented primitives

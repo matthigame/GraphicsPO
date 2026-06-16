@@ -31,6 +31,7 @@ namespace INFOGRTemplate
 
         ConcurrentBag<PrimaryRay> primaryRays;
 
+        // Add offsets for Anti-Aliasing, also add a nice bool to toggle it on and off
         bool aliasingToggle;
         Vector2[] pixelOffsets = [new Vector2(-0.25f, -0.25f), new Vector2(0f, -0.25f), new Vector2(0.25f, -0.25f), 
                                   new Vector2(-0.25f, 0f), new Vector2(0f, 0f), new Vector2(0.25f, 0f),
@@ -81,7 +82,7 @@ namespace INFOGRTemplate
             //add all the lights in the scene
             List<Light> lightElements = new List<Light>();
             Light mainLight = new Light(new Vector3(-8, 25, 7), new Color3(300, 300, 300));
-            SpotLight spotLight = new SpotLight(new Vector3(-20, 5, 0), new Color3(50, 50, 50), new Vector3(0, -1, 1), 20);
+            SpotLight spotLight = new SpotLight(new Vector3(-10, 5, 15), new Color3(50, 50, 50), new Vector3(0, -1, -1), 20);
             //Light secondaryLight = new Light(new Vector3(-5, 4, 12), new Color3(1, 1, 1));
             lightElements.Add(mainLight);
             //lightElements.Add(secondaryLight);
@@ -108,7 +109,7 @@ namespace INFOGRTemplate
             if (KeyBoardState.IsKeyDown(Keys.K))
                 DrawDebug();
 
-            //when F is down, anti-aliasing is toggled
+            //when F is pressed down for a frame, anti-aliasing is toggled
             if (KeyBoardState.IsKeyPressed(Keys.F))
                 if (aliasingToggle)
                     aliasingToggle = false;
