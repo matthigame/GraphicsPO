@@ -14,7 +14,7 @@ namespace INFOGRTemplate
     {
         public Vector3 position = new Vector3(0, 0, 0), lookAtDirection = new Vector3(0, 0, 1), upDirection = new Vector3(0, 1, 0), rightDirection;
         public Vector3[] screenCorners = new Vector3[4];
-        public float fov = 1, angleX = 0, angleY = 0;
+        public float fov = 90, angleX = 0, angleY = 0;
         float aspectRatio = 1;
 
         public Camera(Vector3 position, Vector3 lookAtDirection, Vector3 upDirection, Surface screen)
@@ -42,8 +42,11 @@ namespace INFOGRTemplate
 
             upDirection = Vector3.Normalize(Vector3.Cross(lookAtDirection, rightDirection));
 
+
             //updating the screen
-            Vector3 screenCenter = position + (fov * lookAtDirection);
+            float rad = (fov / 2) * (MathF.PI / 180f);
+            float d = 1 / MathF.Tan(rad); 
+            Vector3 screenCenter = position + (d * lookAtDirection);
             screenCorners[0] = screenCenter + upDirection - (aspectRatio * rightDirection);
             screenCorners[1] = screenCenter + upDirection + (aspectRatio * rightDirection);
             screenCorners[2] = screenCenter - upDirection - (aspectRatio * rightDirection);
