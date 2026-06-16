@@ -45,13 +45,14 @@ namespace INFOGRTemplate
             Sphere sphereElement1 = new Sphere(new Vector3(-5, 1, 6), 1, new Color3(1, 0, 0), Materials.Diffuse);
             Sphere sphereElement2 = new Sphere(new Vector3(-2, 2, 6), 1.5f, new Color3(0, 1, 0), Materials.Reflective);
             Sphere sphereElement3 = new Sphere(new Vector3(2, 2, 6), 2, new Color3(0, 0, 0), Materials.Reflective);
-            Sphere sphereElement4 = new Sphere(new Vector3(0, 0, 4), 1, new Color3(0, 0, 0), Materials.Refractive);
+            Sphere sphereElement4 = new Sphere(new Vector3(0, 0, 4), 1, new Color3(1, 0.8f, 0.8f), Materials.Refractive);
+
 
             Plane basePlane = new Plane(new Vector3(0, 1, 0), 1f, new Color3(0.02f, 0.08f, 0.2f), Materials.Diffuse, true); //floor
-            Plane wallPlane = new Plane(new Vector3(0, 0, -1), 20f, new Color3(0, 0, 0), Materials.Reflective, false); //backboard
+            Plane wallPlane = new Plane(new Vector3(0, 0, -1), 20f, new Color3(0.2f, 1, 0.2f), Materials.Diffuse, false); //backboard
 
 
-            Triangle triangle1 = new Triangle(new Color3(1, 1, 1), [new Vector3(-2, 0, 3), new Vector3(2, 0, 3), new Vector3(0, 2, 3)], Materials.Refractive);
+            Triangle triangle1 = new Triangle(new Color3(1, 0, 0), [new Vector3(-2, 0, 8), new Vector3(2, 0, 8), new Vector3(0, 2, 8)], Materials.Diffuse);
             //Triangle triangle2 = new Triangle(new Color3(0, 1, 1), [new Vector3(0, 1, 3), new Vector3(1, 1, 3), new Vector3(0, 2, 3)], Materials.Diffuse);
             //Triangle triangle3 = new Triangle(new Color3(1, 0, 1), [new Vector3(0, 0, 3), new Vector3(0, 1, 3), new Vector3(-1, 1, 3)], Materials.Diffuse);
             //Triangle triangle4 = new Triangle(new Color3(1, 1, 1), [new Vector3(-1, 1, 3), new Vector3(0, 1, 3), new Vector3(0, 2, 3)], Materials.Diffuse);
@@ -220,7 +221,9 @@ namespace INFOGRTemplate
                     if (MathF.Abs(ray.sourceRefractIndex - enteringRefractionIndex) < 0.0001f && discriminant < 0) //total internal refraction
                         enteringRefractionIndex = 1; //when the ray comes from inside the primitive, assume we are going into air
 
-                    Vector3 newDirection = (ray.sourceRefractIndex/ enteringRefractionIndex) *(ray.direction - dnDot*normalToUse) - discriminant*normalToUse;
+
+                    Vector3 newDirection = Vector3.Normalize((ray.sourceRefractIndex/ enteringRefractionIndex) *(ray.direction - dnDot*normalToUse) - MathF.Sqrt(discriminant)*normalToUse);
+
 
                     //create a new ray, going in the new direction and set the source refraction index to the material it is currectly going into
                     PrimaryRay refractionRay = new PrimaryRay(finalIntersect.closestIntersect, newDirection, ray.bounces - 1) { sourceRefractIndex = enteringRefractionIndex };
@@ -230,16 +233,13 @@ namespace INFOGRTemplate
                     float FresnelR0 = (enteringRefractionIndex - ray.sourceRefractIndex) / (enteringRefractionIndex + ray.sourceRefractIndex) * (enteringRefractionIndex - ray.sourceRefractIndex) / (enteringRefractionIndex + ray.sourceRefractIndex);
                     float Fresnel = FresnelR0 + MathF.Pow((1 - FresnelR0) * (1 - Vector3.Dot(-ray.direction, normalToUse)), 5);
 
+
                     if (finalIntersect.primitive.color != new Color3(0, 0, 0))
                         return finalIntersect.primitive.color * (Fresnel * ShootRayThroughPixel(reflectionRay) + (1f - Fresnel) * ShootRayThroughPixel(refractionRay));
                     return ShootRayThroughPixel(refractionRay);
                 }
-                else if (finalIntersect.primitive.material == Materials.Refractive)
-                {
-                    return new Color3(1, 1, 1);
-                }
 
-            return DecidePixelColor(finalIntersect);
+                return DecidePixelColor(finalIntersect);
             }
             return new Color3(58f/ 255f, 166f/255f, 242f/255f);
         }

@@ -121,7 +121,7 @@ namespace INFOGRTemplate
                 bool intersect2 = true;
                 float Distance2 = Vector3.Distance(intersectionPoints[1], ray.startPosition);
                 //check if the intersection is allowed
-                if (Distance1 < 0.0001f || scalar < 0)
+                if (Distance2 < 0.0001f || scalar < 0)
                 {
                     intersectCount--;
                     intersect2 = false;
