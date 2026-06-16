@@ -95,8 +95,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-04T19:48:37.027Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -108,9 +107,9 @@
               "Title": "Raytracer.cs",
               "DocumentMoniker": "C:\\Users\\tobia\\Documents\\Git projects\\GraphicsRayTracer\\Raytracer.cs",
               "RelativeDocumentMoniker": "Raytracer.cs",
-              "ToolTip": "C:\\Users\\tobia\\Documents\\Git projects\\GraphicsRayTracer\\Raytracer.cs",
-              "RelativeToolTip": "Raytracer.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAmwD8AAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\tobia\\Documents\\Git projects\\GraphicsRayTracer\\Raytracer.cs*",
+              "RelativeToolTip": "Raytracer.cs*",
+              "ViewState": "AgIAACgAAAAAAAAAAAAmwC8AAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T14:16:24.445Z",
               "EditorCaption": ""
@@ -137,8 +136,7 @@
               "RelativeToolTip": "Primitive.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAUwB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T14:18:52.016Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-02T14:18:52.016Z"
             },
             {
               "$type": "Document",
@@ -162,8 +160,7 @@
               "RelativeToolTip": "util.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAAswD4AAABcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-05T13:37:05.65Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-05T13:37:05.65Z"
             },
             {
               "$type": "Document",
@@ -175,8 +172,7 @@
               "RelativeToolTip": "PrimaryRay.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-04T20:14:38.616Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-04T20:14:38.616Z"
             },
             {
               "$type": "Document",
@@ -188,8 +184,7 @@
               "RelativeToolTip": "Intersection.cs",
               "ViewState": "AgIAAHYAAAAAAAAAAAAiwIwAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T14:19:59.681Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-02T14:19:59.681Z"
             },
             {
               "$type": "Document",
@@ -201,8 +196,7 @@
               "RelativeToolTip": "Sphere.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAcwC0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T14:35:21.404Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-02T14:35:21.404Z"
             },
             {
               "$type": "Document",
@@ -226,8 +220,7 @@
               "RelativeToolTip": "template.cs",
               "ViewState": "AgIAAG8AAAAAAAAAAAAwwN4AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T14:31:46.604Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-02T14:31:46.604Z"
             },
             {
               "$type": "Document",
