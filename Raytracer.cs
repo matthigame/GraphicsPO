@@ -4,6 +4,7 @@ using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using SixLabors.ImageSharp.PixelFormats;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
@@ -27,10 +28,8 @@ namespace INFOGRTemplate
         public float sensitivity = 3f;
         public KeyboardState KeyBoardState {  get; set; }
         public MouseState MouseState { get; set; }
-        PrimaryRay mainRay;
 
-        List<PrimaryRay> primaryRays;
-        List<ShadowRay> shadowRays;
+        ConcurrentBag<PrimaryRay> primaryRays;
 
         bool aliasingToggle;
         Vector2[] pixelOffsets = [new Vector2(-0.25f, -0.25f), new Vector2(0f, -0.25f), new Vector2(0.25f, -0.25f), 
@@ -49,17 +48,17 @@ namespace INFOGRTemplate
         { 
             //add all the objects in the scene
             List<Primitive> sceneElements = new List<Primitive>();
-            Sphere sphereElement1 = new Sphere(new Vector3(-5, 1, 6), 1, new Color3(1, 0, 0), Materials.Diffuse);
-            Sphere sphereElement2 = new Sphere(new Vector3(-2, 2, 6), 1.5f, new Color3(0, 1, 0), Materials.Reflective);
-            Sphere sphereElement3 = new Sphere(new Vector3(2, 2, 6), 2, new Color3(0, 0, 0), Materials.Reflective);
-            Sphere sphereElement4 = new Sphere(new Vector3(0, 0, 4), 1, new Color3(1, 0.8f, 0.8f), Materials.Refractive);
+            Sphere sphereElement1 = new Sphere(new Vector3(-5, 1, 6), 1, new Color3(1, 0, 0), Materials.Diffuse, true);
+            Sphere sphereElement2 = new Sphere(new Vector3(-2, 2, 6), 1.5f, new Color3(0, 1, 0), Materials.Reflective, false);
+            Sphere sphereElement3 = new Sphere(new Vector3(2, 2, 6), 2, new Color3(0, 0, 0), Materials.Reflective, false);
+            Sphere sphereElement4 = new Sphere(new Vector3(0, 0, 3), 1.2f, new Color3(1, 1f, 1f), Materials.Refractive, false);
 
 
             Plane basePlane = new Plane(new Vector3(0, 1, 0), 1f, new Color3(0.02f, 0.08f, 0.2f), Materials.Diffuse, true); //floor
             Plane wallPlane = new Plane(new Vector3(0, 0, -1), 20f, new Color3(0.4f, 0.1f, 0.7f), Materials.Metallic, false); //backboard
 
 
-            Triangle triangle1 = new Triangle(new Color3(1, 0, 0), [new Vector3(-2, 0, 8), new Vector3(2, 0, 8), new Vector3(0, 2, 8)], Materials.Diffuse);
+            Triangle triangle1 = new Triangle(new Color3(1, 0, 0), [new Vector3(-2, 0, 8), new Vector3(2, 0, 8), new Vector3(0, 2, 8)], Materials.Diffuse, false);
             //Triangle triangle2 = new Triangle(new Color3(0, 1, 1), [new Vector3(0, 1, 3), new Vector3(1, 1, 3), new Vector3(0, 2, 3)], Materials.Diffuse);
             //Triangle triangle3 = new Triangle(new Color3(1, 0, 1), [new Vector3(0, 0, 3), new Vector3(0, 1, 3), new Vector3(-1, 1, 3)], Materials.Diffuse);
             //Triangle triangle4 = new Triangle(new Color3(1, 1, 1), [new Vector3(-1, 1, 3), new Vector3(0, 1, 3), new Vector3(0, 2, 3)], Materials.Diffuse);
@@ -67,6 +66,7 @@ namespace INFOGRTemplate
             sceneElements.Add(sphereElement1);
             sceneElements.Add(sphereElement2);
             sceneElements.Add(sphereElement3);
+            sceneElements.Add(sphereElement4);
 
 
             sceneElements.Add(basePlane);
@@ -99,35 +99,10 @@ namespace INFOGRTemplate
         public void Render()
         {
             Vector2 debugOrigin = new Vector2(screen.width / 2 - camera.position.X, 300 + camera.position.Z);
-            int n = 0;
-            primaryRays = new List<PrimaryRay>(); //reset the list every render
+            primaryRays = new ConcurrentBag<PrimaryRay>(); //reset the list every render
 
-
-            for (int pixelX = 0; pixelX < screen.width; pixelX++) //for every pixel horizontally
-            {
-                for (int pixelY = 0; pixelY < screen.height; pixelY++)
-                {
-                    if (aliasingToggle)
-                    {
-                        Color3 alColor = new Color3(0, 0, 0);
-                        for (int pixelOff = 0; pixelOff < pixelOffsets.Length; pixelOff++)
-                        {
-                            Vector3 direction = (camera.screenCorners[0] + ((pixelX + 0.5f + pixelOffsets[pixelOff].X) / screen.width * (camera.screenCorners[1] - camera.screenCorners[0])) + ((pixelY + 0.5f + pixelOffsets[pixelOff].Y) / screen.height * (camera.screenCorners[2] - camera.screenCorners[0]))) - camera.position;
-                            direction = Vector3.Normalize(direction);
-                            alColor += ActuallyRender(direction, pixelX, pixelY);
-                        }
-                        alColor = alColor / pixelOffsets.Length;
-                        screen.Plot(pixelX, pixelY, alColor);
-                    }
-                    else
-                    {
-                        Vector3 direction = (camera.screenCorners[0] + ((pixelX + 0.5f) / screen.width * (camera.screenCorners[1] - camera.screenCorners[0])) + ((pixelY + 0.5f) / screen.height * (camera.screenCorners[2] - camera.screenCorners[0]))) - camera.position;
-                        direction = Vector3.Normalize(direction);
-                        Color3 color = ActuallyRender(direction, pixelX, pixelY);
-                        screen.Plot(pixelX, pixelY, color);
-                    }
-                }
-            }
+            //loop through every row, and parallelly render every pixel in that row (muti-threading)
+            Parallel.For(0, screen.height, pixelY => RenderRow(pixelY));
 
             //when K is down, the debug screen is shown
             if (KeyBoardState.IsKeyDown(Keys.K))
@@ -184,17 +159,37 @@ namespace INFOGRTemplate
 
         }
 
+        public void RenderRow(int pixelY) 
+        {
+            for (int pixelX = 0; pixelX < screen.width; pixelX++) //loop through all the pixels in the row
+            {
+                if (aliasingToggle) //anti-aliasing is active
+                {
+                    Color3 alColor = new Color3(0, 0, 0); //define a blank color, so that we can add on top
+                    for (int pixelOff = 0; pixelOff < pixelOffsets.Length; pixelOff++) //loop through all the offsets that are defined at the top of the class
+                    {
+                        //add the offsets to the middle of the pixel
+                        Vector3 direction = (camera.screenCorners[0] + ((pixelX + 0.5f + pixelOffsets[pixelOff].X) / screen.width * (camera.screenCorners[1] - camera.screenCorners[0])) + ((pixelY + 0.5f + pixelOffsets[pixelOff].Y) / screen.height * (camera.screenCorners[2] - camera.screenCorners[0]))) - camera.position;
+                        direction = Vector3.Normalize(direction);
+                        alColor += ActuallyRender(direction, pixelX, pixelY); //add the result of each ray
+                    }
+                    alColor = alColor / pixelOffsets.Length; //divide to get average
+                    screen.Plot(pixelX, pixelY, alColor);
+                }
+                else
+                {
+                    Vector3 direction = (camera.screenCorners[0] + ((pixelX + 0.5f) / screen.width * (camera.screenCorners[1] - camera.screenCorners[0])) + ((pixelY + 0.5f) / screen.height * (camera.screenCorners[2] - camera.screenCorners[0]))) - camera.position;
+                    direction = Vector3.Normalize(direction);
+                    Color3 color = ActuallyRender(direction, pixelX, pixelY);
+                    screen.Plot(pixelX, pixelY, color);
+                }
+            }
+        }
+
         public Color3 ActuallyRender(Vector3 direct, int pixX, int pixY)
         {
-            if (mainRay == null) //the first time, the ray has to be instantiated
-            {
-                mainRay = new PrimaryRay(camera.position, direct, 10);
-            }
-            else
-            {
-                mainRay.startPosition = camera.position;
-                mainRay.direction = Vector3.Normalize(direct);
-            }
+            //make the actual ray
+            PrimaryRay ray = new PrimaryRay(camera.position, direct, 10);
 
             //add 1 in 15 rays of the middle screen row to a list to display in the debug screen
             if (pixX % 15 == 0 && pixY == screen.height / 2)
@@ -204,7 +199,7 @@ namespace INFOGRTemplate
 
             //This is the actual ray
             if (!KeyBoardState.IsKeyDown(Keys.K))
-                return ShootRayThroughPixel(mainRay);
+                return ShootRayThroughPixel(ray);
             return new Color3(0, 0, 0);
             
         }
@@ -230,11 +225,7 @@ namespace INFOGRTemplate
                     if (Vector3.Dot(finalIntersect.normalVector, ray.direction) > 0)
                         normalToUse *= -1; //flip the normal vector for correct refraction math
 
-                    float enteringRefractionIndex = finalIntersect.primitive.refraction_index;
-
-                    if (MathF.Abs(ray.sourceRefractIndex - enteringRefractionIndex) < 0.0001f)
-                        enteringRefractionIndex = 1; //when the ray comes from inside the primitive, assume we are going into air
-
+                    float enteringRefractionIndex = finalIntersect.primitive.refraction_index; //get the refraction index from the primitive
 
                     float dnDot = Vector3.Dot(ray.direction, normalToUse);
                     float discriminant = 1 - (ray.sourceRefractIndex * ray.sourceRefractIndex) / (enteringRefractionIndex * enteringRefractionIndex) * (1 - dnDot * dnDot);
@@ -242,27 +233,26 @@ namespace INFOGRTemplate
                     if (MathF.Abs(ray.sourceRefractIndex - enteringRefractionIndex) < 0.0001f && discriminant < 0) //total internal refraction
                         enteringRefractionIndex = 1; //when the ray comes from inside the primitive, assume we are going into air
 
-
+                    //formula given in the slides
                     Vector3 newDirection = Vector3.Normalize((ray.sourceRefractIndex/ enteringRefractionIndex) *(ray.direction - dnDot*normalToUse) - MathF.Sqrt(discriminant)*normalToUse);
 
 
                     //create a new ray, going in the new direction and set the source refraction index to the material it is currectly going into
                     PrimaryRay refractionRay = new PrimaryRay(finalIntersect.closestIntersect, newDirection, ray.bounces - 1) { sourceRefractIndex = enteringRefractionIndex };
 
+                    //also create a reflected ray to allow partial reflection when relevant
                     PrimaryRay reflectionRay = new PrimaryRay(finalIntersect.closestIntersect, Vector3.Reflect(ray.direction, normalToUse), ray.bounces - 1);
 
+                    //Fresnel coeëficient calculations
                     float FresnelR0 = (enteringRefractionIndex - ray.sourceRefractIndex) / (enteringRefractionIndex + ray.sourceRefractIndex) * (enteringRefractionIndex - ray.sourceRefractIndex) / (enteringRefractionIndex + ray.sourceRefractIndex);
                     float Fresnel = FresnelR0 + MathF.Pow((1 - FresnelR0) * (1 - Vector3.Dot(-ray.direction, normalToUse)), 5);
 
-
-                    if (finalIntersect.primitive.color != new Color3(0, 0, 0))
-                        return finalIntersect.primitive.color * (Fresnel * ShootRayThroughPixel(reflectionRay) + (1f - Fresnel) * ShootRayThroughPixel(refractionRay));
-                    return ShootRayThroughPixel(refractionRay);
+                    return finalIntersect.primitive.color * (Fresnel * ShootRayThroughPixel(reflectionRay) + (1f - Fresnel) * ShootRayThroughPixel(refractionRay)); //reflected and refracted colors balanced by Fresnel, modulated by the color of the primitive
                 }
 
-                return DecidePixelColor(finalIntersect);
+                return DecidePixelColor(finalIntersect); //Diffuse. So we dont need to go into recursion
             }
-            return new Color3(58f/255f, 166f/255f, 242f/255f);
+            return new Color3(58f/255f, 166f/255f, 242f/255f); //default color
         }
 
 
@@ -288,30 +278,13 @@ namespace INFOGRTemplate
         private Color3 DecidePixelColor(Intersection initialIntersect)
         {
             Color3 diffuseColor = initialIntersect.primitive.color;
-            List<Light> lightsReached = LightsReached(initialIntersect);
+            List<Light> lightsReached = LightsReached(initialIntersect); //a list of light sources to consider
             Color3 finalColor = new Color3(0, 0, 0); //start off black
-            if (initialIntersect.primitive is Plane)
-            {
-                Plane plane = initialIntersect.primitive as Plane;
-                if (plane.checkers)
-                    diffuseColor = plane.checkerBoards(initialIntersect.closestIntersect);
-            }
-            else if (initialIntersect.primitive is Sphere)
-            {
-                Sphere sphere = initialIntersect.primitive as Sphere;
-                if (sphere.checkers)
-                {
-                    diffuseColor = sphere.checkerBoards(initialIntersect.closestIntersect, initialIntersect.normalVector, Vector3.Distance(camera.position, initialIntersect.closestIntersect));
-                }
-            }
-            else if (initialIntersect.primitive is Triangle)
-            {
-                Triangle triangle = initialIntersect.primitive as Triangle;
-                if (triangle.checkers)
-                {
-                    diffuseColor = triangle.checkerBoards(initialIntersect.closestIntersect);
-                }
-            }
+
+            //if checkers is true, change the diffuse color based the u and v values at the intersect point
+            if (initialIntersect.primitive.checkers)
+                diffuseColor = initialIntersect.primitive.checkerBoards(initialIntersect.closestIntersect, initialIntersect.normalVector, Vector3.Distance(camera.position, initialIntersect.closestIntersect));
+
 
             foreach (Light light in lightsReached)
             {
@@ -348,13 +321,15 @@ namespace INFOGRTemplate
 
 
         //only needed for the debugging
-        List<Vector3> endPoints;
+        ConcurrentBag<Vector3> endPoints;
         private List<Light> LightsReached (Intersection source)
         {
-            endPoints = new List<Vector3> ();
+            if (KeyBoardState.IsKeyDown(Keys.K))
+                endPoints = new ConcurrentBag<Vector3> ();
+            
             ShadowRay shadowRay = null;
-            List<Light> finalResult = new List<Light>();
-            for (int j = 0; j < scene.lightSources.Count; j++)
+            List<Light> finalResult = new List<Light>(); //store the lights here
+            for (int j = 0; j < scene.lightSources.Count; j++) //for all lights in the scene
             {
                 if (shadowRay == null) //first time in the loop
                 {
@@ -368,6 +343,8 @@ namespace INFOGRTemplate
                 }
 
                 bool blocked = false;
+
+                //go through all primitives to check if the light is blocked
                 foreach (Primitive primitive in scene.primitives)
                 {
                     Intersection intersect = primitive.Intersect(shadowRay);
@@ -377,7 +354,8 @@ namespace INFOGRTemplate
                         float distanceToLight = Vector3.Distance(source.closestIntersect, scene.lightSources[j].location);
                         if (distanceToLight > distanceToIntersect && distanceToIntersect > 0.0001f) //prevent intersection with self, and ignores intersection past the light
                         {
-                            endPoints.Add(intersect.closestIntersect);
+                            if(KeyBoardState.IsKeyDown(Keys.K))
+                                endPoints.Add(intersect.closestIntersect);
                             blocked = true;
                         }
 
@@ -399,7 +377,8 @@ namespace INFOGRTemplate
                     else
                     {
                         finalResult.Add(scene.lightSources[j]);
-                        endPoints.Add(scene.lightSources[j].location);
+                        if (KeyBoardState.IsKeyDown(Keys.K))
+                            endPoints.Add(scene.lightSources[j].location);
                     }
                 }
             }

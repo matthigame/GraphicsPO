@@ -12,9 +12,8 @@ namespace INFOGRTemplate
         public Vector3 normalVector;
         public Vector3[] vertices;
         public Vector3 A, B, C;
-        public bool checkers;
 
-        public Triangle(Color3 _color, Vector3[] _vertices, Materials _material, bool _checkers) : base(_color, _vertices[0], PrimitiveTypes.Triangle, _material) 
+        public Triangle(Color3 _color, Vector3[] _vertices, Materials _material, bool _checkers) : base(_color, _vertices[0], PrimitiveTypes.Triangle, _material, _checkers) 
         { 
             vertices = _vertices;
             A = vertices[0];
@@ -22,10 +21,9 @@ namespace INFOGRTemplate
             C = vertices[2];
             normalVector = Vector3.Normalize(Vector3.Cross(B-A, C-A)); //compute the normal vector by taking the cross product of [B-A] and [C-A]
             Debug.WriteLine(normalVector);
-            checkers = _checkers;
         }
 
-        public Color3 checkerBoards(Vector3 hitPoint)
+        public override Color3 checkerBoards(Vector3 hitPoint, Vector3 normalVector, float distance)
         {
             float scale = 1f;
 

@@ -14,12 +14,10 @@ namespace INFOGRTemplate
         public Vector3 normalVector;
         float distance;
         public float equationD;
-        public bool checkers;
-        public Plane(Vector3 _normal, float _distance, Color3 _color, Materials _material, bool _checkers) : base(_color, new Vector3(0, 0, 0), PrimitiveTypes.Plane, _material) 
+        public Plane(Vector3 _normal, float _distance, Color3 _color, Materials _material, bool _checkers) : base(_color, new Vector3(0, 0, 0), PrimitiveTypes.Plane, _material, _checkers) 
         {
             normalVector = _normal;
             this.distance = _distance;
-            checkers = _checkers;
 
             Vector3 referencePoint = distance * -normalVector;
             base.position = referencePoint;
@@ -28,10 +26,9 @@ namespace INFOGRTemplate
         }
 
         //alternative constructor where you can input a reference point instead of a distance
-        public Plane(Vector3 _normal, Vector3 _referencePoint, Color3 _color, Materials _material, bool _checkers) : base(_color, _referencePoint, PrimitiveTypes.Plane, _material)
+        public Plane(Vector3 _normal, Vector3 _referencePoint, Color3 _color, Materials _material, bool _checkers) : base(_color, _referencePoint, PrimitiveTypes.Plane, _material, _checkers)
         {
             normalVector = _normal;
-            checkers = _checkers;
             Vector3 temp = _referencePoint * normalVector;
             equationD = -(temp.X + temp.Y + temp.Z);
         }
@@ -69,7 +66,7 @@ namespace INFOGRTemplate
 
         }
 
-        public Color3 checkerBoards(Vector3 hitPoint)
+        public override Color3 checkerBoards(Vector3 hitPoint, Vector3 normalVector, float distance)
         {
             float scale = 1f;
 

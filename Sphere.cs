@@ -11,13 +11,11 @@ namespace INFOGRTemplate
     internal class Sphere : Primitive
     {
         public float radius;
-        public bool checkers;
 
-        public Sphere(Vector3 _position, float _radius, Color3 _color, Materials _material, bool _checkers) : base(_color, _position, PrimitiveTypes.Sphere, _material)
+        public Sphere(Vector3 _position, float _radius, Color3 _color, Materials _material, bool _checkers) : base(_color, _position, PrimitiveTypes.Sphere, _material, _checkers)
         {
             this.position = _position;
             this.radius = _radius;
-            checkers = _checkers;
         }
 
         //calculates the intersection point closest the place the ray was fired from
@@ -44,7 +42,7 @@ namespace INFOGRTemplate
             }
         }
 
-        public Color3 checkerBoards(Vector3 hitPoint, Vector3 normalVector, float distance)
+        public override Color3 checkerBoards(Vector3 hitPoint, Vector3 normalVector, float distance)
         {
             float scale = 10f;
 

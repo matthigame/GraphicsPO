@@ -162,12 +162,12 @@ namespace INFOGRTemplate
         { 
             Triangle triangle = primitive as Triangle;
 
-            Plane trianglePlane = new Plane(triangle.normalVector, triangle.A, triangle.color, triangle.material, false);
+            Plane trianglePlane = new Plane(triangle.normalVector, triangle.A, triangle.color, triangle.material, false); //the plane in which the triangle lies
 
             Intersection planeIntersect = trianglePlane.Intersect(ray);
 
 
-            if (planeIntersect.Intersects)
+            if (planeIntersect.Intersects) //check if our point lies between the 3 vertices
             {
                 float check1 = Vector3.Dot(Vector3.Cross(triangle.B - triangle.A, planeIntersect.closestIntersect - triangle.A), triangle.normalVector);
                 float check2 = Vector3.Dot(Vector3.Cross(triangle.C - triangle.B, planeIntersect.closestIntersect - triangle.B), triangle.normalVector);
@@ -175,13 +175,13 @@ namespace INFOGRTemplate
 
                 if (check1 >= 0 &&
                     check2 >= 0 && 
-                    check3 >= 0)   
+                    check3 >= 0)   //if the point lies counterclockwise to all vertices, we have an intersection
                 {
                     intersectCount++;
                     closestIntersect = planeIntersect.closestIntersect;
                     intersectionPoints[0] = closestIntersect;
 
-                    if (Vector3.Dot(ray.direction, triangle.normalVector) > 0)
+                    if (Vector3.Dot(ray.direction, triangle.normalVector) > 0) //make sure the normal is facing toward the source of the ray
                         normalVector = -triangle.normalVector;
                     else
                         normalVector = triangle.normalVector;
